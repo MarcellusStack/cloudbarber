@@ -20,7 +20,7 @@ CloudBarber is a comprehensive management system designed specifically for barbe
 ### Backend
 1. Clone this repository:
    ```bash
-   git clone [<repo_url>](https://github.com/MarcellusStack/cloudbarber.git)
+   git clone https://github.com/MarcellusStack/cloudbarber.git
    ```
 2. Set up Docker Compose for managing the backend services.
 3. Install the Directus extension sync from [here](https://github.com/tractr/directus-sync).
