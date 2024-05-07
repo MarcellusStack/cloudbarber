@@ -44,9 +44,6 @@ type Query {
   notifications(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_notifications!]!
   notifications_by_id(id: ID!, version: String): directus_notifications
   notifications_aggregated(groupBy: [String], filter: directus_notifications_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_notifications_aggregated!]!
-  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users!]!
-  users_by_id(id: ID!, version: String): directus_users
-  users_aggregated(groupBy: [String], filter: directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_users_aggregated!]!
   shares(filter: directus_shares_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_shares!]!
   shares_by_id(id: ID!, version: String): directus_shares
   shares_aggregated(groupBy: [String], filter: directus_shares_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_shares_aggregated!]!
@@ -66,6 +63,9 @@ type Query {
   versions_by_id(id: ID!, version: String): directus_versions
   versions_aggregated(groupBy: [String], filter: directus_versions_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_versions_aggregated!]!
   settings(version: String): directus_settings
+  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users!]!
+  users_by_id(id: ID!, version: String): directus_users
+  users_aggregated(groupBy: [String], filter: directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_users_aggregated!]!
 }
 
 type Mutation {
@@ -116,8 +116,6 @@ type Mutation {
   create_webhooks_item(data: create_directus_webhooks_input!): directus_webhooks
   create_notifications_items(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_notifications_input!]): [directus_notifications!]!
   create_notifications_item(data: create_directus_notifications_input!): directus_notifications
-  create_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_users_input!]): [directus_users!]!
-  create_users_item(data: create_directus_users_input!): directus_users
   create_shares_items(filter: directus_shares_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_shares_input!]): [directus_shares!]!
   create_shares_item(data: create_directus_shares_input!): directus_shares
   create_presets_items(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_presets_input!]): [directus_presets!]!
@@ -130,6 +128,8 @@ type Mutation {
   create_translations_item(data: create_directus_translations_input!): directus_translations
   create_versions_items(filter: directus_versions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_versions_input!]): [directus_versions!]!
   create_versions_item(data: create_directus_versions_input!): directus_versions
+  create_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_users_input!]): [directus_users!]!
+  create_users_item(data: create_directus_users_input!): directus_users
   update_folders_items(filter: directus_folders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_folders_input!): [directus_folders!]!
   update_folders_batch(filter: directus_folders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_folders_input!]): [directus_folders!]!
   update_folders_item(id: ID!, data: update_directus_folders_input!): directus_folders
@@ -154,9 +154,6 @@ type Mutation {
   update_notifications_items(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_notifications_input!): [directus_notifications!]!
   update_notifications_batch(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_notifications_input!]): [directus_notifications!]!
   update_notifications_item(id: ID!, data: update_directus_notifications_input!): directus_notifications
-  update_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_users_input!): [directus_users!]!
-  update_users_batch(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_users_input!]): [directus_users!]!
-  update_users_item(id: ID!, data: update_directus_users_input!): directus_users
   update_shares_items(filter: directus_shares_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_shares_input!): [directus_shares!]!
   update_shares_batch(filter: directus_shares_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_shares_input!]): [directus_shares!]!
   update_shares_item(id: ID!, data: update_directus_shares_input!): directus_shares
@@ -176,6 +173,9 @@ type Mutation {
   update_versions_batch(filter: directus_versions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_versions_input!]): [directus_versions!]!
   update_versions_item(id: ID!, data: update_directus_versions_input!): directus_versions
   update_settings(data: update_directus_settings_input!): directus_settings
+  update_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_users_input!): [directus_users!]!
+  update_users_batch(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_users_input!]): [directus_users!]!
+  update_users_item(id: ID!, data: update_directus_users_input!): directus_users
   delete_folders_items(ids: [ID]!): delete_many
   delete_folders_item(id: ID!): delete_one
   delete_permissions_items(ids: [ID]!): delete_many
@@ -192,8 +192,6 @@ type Mutation {
   delete_webhooks_item(id: ID!): delete_one
   delete_notifications_items(ids: [ID]!): delete_many
   delete_notifications_item(id: ID!): delete_one
-  delete_users_items(ids: [ID]!): delete_many
-  delete_users_item(id: ID!): delete_one
   delete_shares_items(ids: [ID]!): delete_many
   delete_shares_item(id: ID!): delete_one
   delete_presets_items(ids: [ID]!): delete_many
@@ -206,6 +204,8 @@ type Mutation {
   delete_translations_item(id: ID!): delete_one
   delete_versions_items(ids: [ID]!): delete_many
   delete_versions_item(id: ID!): delete_one
+  delete_users_items(ids: [ID]!): delete_many
+  delete_users_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -219,7 +219,6 @@ type Subscription {
   directus_revisions_mutated(event: EventEnum): directus_revisions_mutated
   directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
   directus_notifications_mutated(event: EventEnum): directus_notifications_mutated
-  directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_shares_mutated(event: EventEnum): directus_shares_mutated
   directus_presets_mutated(event: EventEnum): directus_presets_mutated
   directus_flows_mutated(event: EventEnum): directus_flows_mutated
@@ -228,7 +227,8 @@ type Subscription {
   directus_versions_mutated(event: EventEnum): directus_versions_mutated
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
-  test_mutated(event: EventEnum): test_mutated
+  directus_users_mutated(event: EventEnum): directus_users_mutated
+  organizations_mutated(event: EventEnum): organizations_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1266,6 +1266,7 @@ type directus_users {
   theme_light_overrides_func: count_functions
   theme_dark_overrides: JSON
   theme_dark_overrides_func: count_functions
+  organization(filter: organizations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): organizations
 }
 
 type directus_users_aggregated {
@@ -1302,6 +1303,7 @@ type directus_users_aggregated_count {
   theme_light: Int
   theme_light_overrides: Int
   theme_dark_overrides: Int
+  organization: Int
 }
 
 type directus_users_mutated {
@@ -1403,6 +1405,27 @@ type directus_webhooks_mutated {
   data: directus_webhooks
 }
 
+type organizations {
+  id: ID!
+  status: String
+  sort: Int
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  name: String!
+  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users]
+  users_func: count_functions
+}
+
+type organizations_mutated {
+  key: ID!
+  event: EventEnum
+  data: organizations
+}
+
 type server_info {
   project: server_info_project
   rateLimit: Boolean
@@ -1426,17 +1449,6 @@ type server_info_project {
 type server_info_query_limit {
   default: Int
   max: Int
-}
-
-type test {
-  id: ID!
-  status: String
-}
-
-type test_mutated {
-  key: ID!
-  event: EventEnum
-  data: test
 }
 
 type users_me_tfa_generate_data {
@@ -1701,6 +1713,7 @@ input create_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
+  organization: create_organizations_input
 }
 
 input create_directus_versions_input {
@@ -1728,6 +1741,18 @@ input create_directus_webhooks_input {
   headers: JSON
   was_active_before_deprecation: Boolean!
   migrated_flow: create_directus_flows_input
+}
+
+input create_organizations_input {
+  id: ID
+  status: String
+  sort: Int
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  name: String!
+  users: [create_directus_users_input]
 }
 
 input date_filter_operators {
@@ -2124,6 +2149,7 @@ input directus_users_filter {
   theme_light_overrides_func: count_function_filter_operators
   theme_dark_overrides: string_filter_operators
   theme_dark_overrides_func: count_function_filter_operators
+  organization: organizations_filter
   _and: [directus_users_filter]
   _or: [directus_users_filter]
 }
@@ -2182,6 +2208,23 @@ input number_filter_operators {
   _nnull: Boolean
   _between: [GraphQLStringOrFloat]
   _nbetween: [GraphQLStringOrFloat]
+}
+
+input organizations_filter {
+  id: string_filter_operators
+  status: string_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  name: string_filter_operators
+  users: directus_users_filter
+  users_func: count_function_filter_operators
+  _and: [organizations_filter]
+  _or: [organizations_filter]
 }
 
 input string_filter_operators {
@@ -2468,6 +2511,7 @@ input update_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
+  organization: update_organizations_input
 }
 
 input update_directus_versions_input {
@@ -2495,4 +2539,16 @@ input update_directus_webhooks_input {
   headers: JSON
   was_active_before_deprecation: Boolean
   migrated_flow: update_directus_flows_input
+}
+
+input update_organizations_input {
+  id: ID
+  status: String
+  sort: Int
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  name: String
+  users: [update_directus_users_input]
 }
