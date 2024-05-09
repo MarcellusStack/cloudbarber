@@ -1,9 +1,9 @@
 {
-  "collection": "test",
+  "collection": "organizations",
   "field": "id",
-  "type": "integer",
+  "type": "uuid",
   "meta": {
-    "collection": "test",
+    "collection": "organizations",
     "conditions": null,
     "display": null,
     "display_options": null,
@@ -16,7 +16,9 @@
     "readonly": true,
     "required": false,
     "sort": 1,
-    "special": null,
+    "special": [
+      "uuid"
+    ],
     "translations": null,
     "validation": null,
     "validation_message": null,
@@ -24,18 +26,18 @@
   },
   "schema": {
     "name": "id",
-    "table": "test",
-    "data_type": "integer",
-    "default_value": "nextval('test_id_seq'::regclass)",
+    "table": "organizations",
+    "data_type": "uuid",
+    "default_value": null,
     "max_length": null,
-    "numeric_precision": 32,
-    "numeric_scale": 0,
+    "numeric_precision": null,
+    "numeric_scale": null,
     "is_nullable": false,
     "is_unique": true,
     "is_primary_key": true,
     "is_generated": false,
     "generation_expression": null,
-    "has_auto_increment": true,
+    "has_auto_increment": false,
     "foreign_key_table": null,
     "foreign_key_column": null
   }
