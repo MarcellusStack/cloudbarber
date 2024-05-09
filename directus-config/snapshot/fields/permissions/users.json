@@ -1,14 +1,12 @@
 {
-  "collection": "organizations",
+  "collection": "permissions",
   "field": "users",
   "type": "alias",
   "meta": {
-    "collection": "organizations",
+    "collection": "permissions",
     "conditions": null,
-    "display": "related-values",
-    "display_options": {
-      "template": "{{first_name}}{{last_name}}"
-    },
+    "display": null,
+    "display_options": null,
     "field": "users",
     "group": null,
     "hidden": false,

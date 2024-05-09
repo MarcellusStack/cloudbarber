@@ -1,13 +1,13 @@
 {
   "collection": "directus_users",
-  "field": "organization",
+  "field": "permission",
   "type": "uuid",
   "meta": {
     "collection": "directus_users",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "organization",
+    "field": "permission",
     "group": null,
     "hidden": false,
     "interface": "select-dropdown-m2o",
@@ -15,7 +15,7 @@
     "options": null,
     "readonly": false,
     "required": false,
-    "sort": 1,
+    "sort": 2,
     "special": null,
     "translations": null,
     "validation": null,
@@ -23,7 +23,7 @@
     "width": "full"
   },
   "schema": {
-    "name": "organization",
+    "name": "permission",
     "table": "directus_users",
     "data_type": "uuid",
     "default_value": null,
@@ -36,7 +36,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "organizations",
+    "foreign_key_table": "permissions",
     "foreign_key_column": "id"
   }
 }
