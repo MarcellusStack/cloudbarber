@@ -24,6 +24,10 @@ CloudBarber is a comprehensive management system designed specifically for barbe
    ```
 2. Set up Docker Compose for managing the backend services.
 3. Install the Directus extension sync from [here](https://github.com/tractr/directus-sync).
+4. Put the extension into the extension folder
+5. Check if the extension is installed in Directus
+6. change Directus url, email and password in directus-sync.config.js
+7. run: npx directus-sync push
 
 ### Frontend
 Coming soon.
