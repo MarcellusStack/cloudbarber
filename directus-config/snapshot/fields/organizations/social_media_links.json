@@ -1,0 +1,31 @@
+{
+  "collection": "organizations",
+  "field": "social_media_links",
+  "type": "alias",
+  "meta": {
+    "collection": "organizations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "social_media_links",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": {
+      "headerIcon": "language"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 10,
+    "special": [
+      "alias",
+      "group",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

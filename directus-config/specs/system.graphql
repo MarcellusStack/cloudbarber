@@ -1416,6 +1416,9 @@ type organizations {
   date_updated: Date
   date_updated_func: datetime_functions
   name: String!
+  facebook: String
+  twitter: String
+  instagram: String
   users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users]
   users_func: count_functions
 }
@@ -1752,6 +1755,9 @@ input create_organizations_input {
   user_updated: create_directus_users_input
   date_updated: Date
   name: String!
+  facebook: String
+  twitter: String
+  instagram: String
   users: [create_directus_users_input]
 }
 
@@ -2221,6 +2227,9 @@ input organizations_filter {
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
   name: string_filter_operators
+  facebook: string_filter_operators
+  twitter: string_filter_operators
+  instagram: string_filter_operators
   users: directus_users_filter
   users_func: count_function_filter_operators
   _and: [organizations_filter]
@@ -2550,5 +2559,8 @@ input update_organizations_input {
   user_updated: update_directus_users_input
   date_updated: Date
   name: String
+  facebook: String
+  twitter: String
+  instagram: String
   users: [update_directus_users_input]
 }

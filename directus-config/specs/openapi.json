@@ -10043,6 +10043,18 @@
             "nullable": false,
             "type": "string"
           },
+          "facebook": {
+            "nullable": true,
+            "type": "string"
+          },
+          "twitter": {
+            "nullable": true,
+            "type": "string"
+          },
+          "instagram": {
+            "nullable": true,
+            "type": "string"
+          },
           "users": {
             "nullable": true,
             "type": "array",
