@@ -7,10 +7,6 @@ type Query {
   organizations_by_id(id: ID!, version: String): organizations
   organizations_aggregated(groupBy: [String], filter: organizations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [organizations_aggregated!]!
   organizations_by_version(version: String!, id: ID!): version_organizations
-  permissions(filter: permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [permissions!]!
-  permissions_by_id(id: ID!, version: String): permissions
-  permissions_aggregated(groupBy: [String], filter: permissions_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [permissions_aggregated!]!
-  permissions_by_version(version: String!, id: ID!): version_permissions
 }
 
 type Mutation {
@@ -18,23 +14,16 @@ type Mutation {
   create_directus_sync_id_map_item(data: create_directus_sync_id_map_input!): directus_sync_id_map
   create_organizations_items(filter: organizations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_organizations_input!]): [organizations!]!
   create_organizations_item(data: create_organizations_input!): organizations
-  create_permissions_items(filter: permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_permissions_input!]): [permissions!]!
-  create_permissions_item(data: create_permissions_input!): permissions
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
   update_organizations_items(filter: organizations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_organizations_input!): [organizations!]!
   update_organizations_batch(filter: organizations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_organizations_input!]): [organizations!]!
   update_organizations_item(id: ID!, data: update_organizations_input!): organizations
-  update_permissions_items(filter: permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_permissions_input!): [permissions!]!
-  update_permissions_batch(filter: permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_permissions_input!]): [permissions!]!
-  update_permissions_item(id: ID!, data: update_permissions_input!): permissions
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_organizations_items(ids: [ID]!): delete_many
   delete_organizations_item(id: ID!): delete_one
-  delete_permissions_items(ids: [ID]!): delete_many
-  delete_permissions_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -58,7 +47,6 @@ type Subscription {
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   organizations_mutated(event: EventEnum): organizations_mutated
-  permissions_mutated(event: EventEnum): permissions_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -559,7 +547,6 @@ type directus_users {
   theme_dark_overrides: JSON
   theme_dark_overrides_func: count_functions
   organization(filter: organizations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): organizations
-  permission(filter: permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): permissions
 }
 
 type directus_users_mutated {
@@ -660,56 +647,6 @@ type organizations_mutated {
   data: organizations
 }
 
-type permissions {
-  id: ID!
-  status: String
-  sort: Int
-  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_created: Date
-  date_created_func: datetime_functions
-  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_updated: Date
-  date_updated_func: datetime_functions
-  name: String
-  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users]
-  users_func: count_functions
-}
-
-type permissions_aggregated {
-  group: JSON
-  countAll: Int
-  count: permissions_aggregated_count
-  countDistinct: permissions_aggregated_count
-  avg: permissions_aggregated_fields
-  sum: permissions_aggregated_fields
-  avgDistinct: permissions_aggregated_fields
-  sumDistinct: permissions_aggregated_fields
-  min: permissions_aggregated_fields
-  max: permissions_aggregated_fields
-}
-
-type permissions_aggregated_count {
-  id: Int
-  status: Int
-  sort: Int
-  user_created: Int
-  date_created: Int
-  user_updated: Int
-  date_updated: Int
-  name: Int
-  users: Int
-}
-
-type permissions_aggregated_fields {
-  sort: Float
-}
-
-type permissions_mutated {
-  key: ID!
-  event: EventEnum
-  data: permissions
-}
-
 """"""
 type version_directus_sync_id_map {
   id: ID
@@ -721,19 +658,6 @@ type version_directus_sync_id_map {
 
 """"""
 type version_organizations {
-  id: ID
-  status: String
-  sort: Int
-  user_created: JSON
-  date_created: Date
-  user_updated: JSON
-  date_updated: Date
-  name: String
-  users: JSON
-}
-
-""""""
-type version_permissions {
   id: ID
   status: String
   sort: Int
@@ -851,7 +775,6 @@ input create_directus_users_input {
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
   organization: create_organizations_input
-  permission: create_permissions_input
 }
 
 input create_organizations_input {
@@ -863,18 +786,6 @@ input create_organizations_input {
   user_updated: create_directus_users_input
   date_updated: Date
   name: String!
-  users: [create_directus_users_input]
-}
-
-input create_permissions_input {
-  id: ID
-  status: String
-  sort: Int
-  user_created: create_directus_users_input
-  date_created: Date
-  user_updated: create_directus_users_input
-  date_updated: Date
-  name: String
   users: [create_directus_users_input]
 }
 
@@ -1113,7 +1024,6 @@ input directus_users_filter {
   theme_dark_overrides: string_filter_operators
   theme_dark_overrides_func: count_function_filter_operators
   organization: organizations_filter
-  permission: permissions_filter
   _and: [directus_users_filter]
   _or: [directus_users_filter]
 }
@@ -1172,23 +1082,6 @@ input organizations_filter {
   users_func: count_function_filter_operators
   _and: [organizations_filter]
   _or: [organizations_filter]
-}
-
-input permissions_filter {
-  id: string_filter_operators
-  status: string_filter_operators
-  sort: number_filter_operators
-  user_created: directus_users_filter
-  date_created: date_filter_operators
-  date_created_func: datetime_function_filter_operators
-  user_updated: directus_users_filter
-  date_updated: date_filter_operators
-  date_updated_func: datetime_function_filter_operators
-  name: string_filter_operators
-  users: directus_users_filter
-  users_func: count_function_filter_operators
-  _and: [permissions_filter]
-  _or: [permissions_filter]
 }
 
 input string_filter_operators {
@@ -1293,22 +1186,9 @@ input update_directus_users_input {
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
   organization: update_organizations_input
-  permission: update_permissions_input
 }
 
 input update_organizations_input {
-  id: ID
-  status: String
-  sort: Int
-  user_created: update_directus_users_input
-  date_created: Date
-  user_updated: update_directus_users_input
-  date_updated: Date
-  name: String
-  users: [update_directus_users_input]
-}
-
-input update_permissions_input {
   id: ID
   status: String
   sort: Int

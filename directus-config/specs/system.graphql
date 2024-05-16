@@ -229,7 +229,6 @@ type Subscription {
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   organizations_mutated(event: EventEnum): organizations_mutated
-  permissions_mutated(event: EventEnum): permissions_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1268,7 +1267,6 @@ type directus_users {
   theme_dark_overrides: JSON
   theme_dark_overrides_func: count_functions
   organization(filter: organizations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): organizations
-  permission(filter: permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): permissions
 }
 
 type directus_users_aggregated {
@@ -1306,7 +1304,6 @@ type directus_users_aggregated_count {
   theme_light_overrides: Int
   theme_dark_overrides: Int
   organization: Int
-  permission: Int
 }
 
 type directus_users_mutated {
@@ -1427,27 +1424,6 @@ type organizations_mutated {
   key: ID!
   event: EventEnum
   data: organizations
-}
-
-type permissions {
-  id: ID!
-  status: String
-  sort: Int
-  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_created: Date
-  date_created_func: datetime_functions
-  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_updated: Date
-  date_updated_func: datetime_functions
-  name: String
-  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users]
-  users_func: count_functions
-}
-
-type permissions_mutated {
-  key: ID!
-  event: EventEnum
-  data: permissions
 }
 
 type server_info {
@@ -1738,7 +1714,6 @@ input create_directus_users_input {
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
   organization: create_organizations_input
-  permission: create_permissions_input
 }
 
 input create_directus_versions_input {
@@ -1777,18 +1752,6 @@ input create_organizations_input {
   user_updated: create_directus_users_input
   date_updated: Date
   name: String!
-  users: [create_directus_users_input]
-}
-
-input create_permissions_input {
-  id: ID
-  status: String
-  sort: Int
-  user_created: create_directus_users_input
-  date_created: Date
-  user_updated: create_directus_users_input
-  date_updated: Date
-  name: String
   users: [create_directus_users_input]
 }
 
@@ -2187,7 +2150,6 @@ input directus_users_filter {
   theme_dark_overrides: string_filter_operators
   theme_dark_overrides_func: count_function_filter_operators
   organization: organizations_filter
-  permission: permissions_filter
   _and: [directus_users_filter]
   _or: [directus_users_filter]
 }
@@ -2263,23 +2225,6 @@ input organizations_filter {
   users_func: count_function_filter_operators
   _and: [organizations_filter]
   _or: [organizations_filter]
-}
-
-input permissions_filter {
-  id: string_filter_operators
-  status: string_filter_operators
-  sort: number_filter_operators
-  user_created: directus_users_filter
-  date_created: date_filter_operators
-  date_created_func: datetime_function_filter_operators
-  user_updated: directus_users_filter
-  date_updated: date_filter_operators
-  date_updated_func: datetime_function_filter_operators
-  name: string_filter_operators
-  users: directus_users_filter
-  users_func: count_function_filter_operators
-  _and: [permissions_filter]
-  _or: [permissions_filter]
 }
 
 input string_filter_operators {
@@ -2567,7 +2512,6 @@ input update_directus_users_input {
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
   organization: update_organizations_input
-  permission: update_permissions_input
 }
 
 input update_directus_versions_input {
@@ -2598,18 +2542,6 @@ input update_directus_webhooks_input {
 }
 
 input update_organizations_input {
-  id: ID
-  status: String
-  sort: Int
-  user_created: update_directus_users_input
-  date_created: Date
-  user_updated: update_directus_users_input
-  date_updated: Date
-  name: String
-  users: [update_directus_users_input]
-}
-
-input update_permissions_input {
   id: ID
   status: String
   sort: Int

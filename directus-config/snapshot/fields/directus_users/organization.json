@@ -12,9 +12,11 @@
     "hidden": false,
     "interface": "select-dropdown-m2o",
     "note": null,
-    "options": null,
+    "options": {
+      "template": "{{name}}"
+    },
     "readonly": false,
-    "required": false,
+    "required": true,
     "sort": 1,
     "special": null,
     "translations": null,
