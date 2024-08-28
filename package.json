@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/localizations": "^2.6.2",
+    "@clerk/nextjs": "^5.3.4",
     "@mantine/carousel": "^7.12.1",
     "@mantine/charts": "^7.12.1",
     "@mantine/core": "^7.12.1",
@@ -18,9 +20,11 @@
     "@mantine/modals": "^7.12.1",
     "@mantine/notifications": "^7.12.1",
     "@mantine/spotlight": "^7.12.1",
+    "@tabler/icons-react": "^3.14.0",
     "dayjs": "^1.11.13",
     "embla-carousel-react": "^8.2.0",
     "next": "14.2.6",
+    "next-intl": "^3.17.6",
     "next-safe-action": "^7.7.1",
     "react": "^18",
     "react-dom": "^18",
