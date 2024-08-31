@@ -1,5 +1,4 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-
 import createMiddleware from "next-intl/middleware";
 import { locales } from "@lib/i18n";
 
