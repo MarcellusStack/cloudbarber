@@ -16,19 +16,22 @@ export const LocalePicker = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [opened, setOpened] = useState(false);
-  const [selected, setSelected] = useState(() => {
-    const storedLocale = localStorage.getItem("locale");
-    return data.find((item) => item.locale === storedLocale) || data[0];
-  });
+  const [selected, setSelected] = useState(data[0]);
 
   useEffect(() => {
     const storedLocale = localStorage.getItem("locale");
-    if (storedLocale && storedLocale !== params.locale) {
-      const newPathname = pathname.replace(
-        `/${params.locale}`,
-        `/${storedLocale}`
-      );
-      router.push(newPathname);
+    if (storedLocale) {
+      const selectedLocale = data.find((item) => item.locale === storedLocale);
+      if (selectedLocale) {
+        setSelected(selectedLocale);
+        if (storedLocale !== params.locale) {
+          const newPathname = pathname.replace(
+            `/${params.locale}`,
+            `/${storedLocale}`
+          );
+          router.push(newPathname);
+        }
+      }
     }
   }, [params.locale, pathname, router]);
 
