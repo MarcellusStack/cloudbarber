@@ -1,5 +1,12 @@
 {
   "HomePage": {
     "title": "Hallo Welt!"
+  },
+  "AuthClient": {
+    "userId": "Keine aktive Sitzung gefunden",
+    "user": "Benutzer nicht gefunden"
+  },
+  "AdminClient": {
+    "admin": "Keine Admin Berechtigung"
   }
 }
