@@ -8,5 +8,16 @@
   },
   "AdminClient": {
     "admin": "Keine Admin Berechtigung"
+  },
+  "User": {
+    "noUser": "Benutzer nicht gefunden"
+  },
+  "Onboarding": {
+    "termLabel": "Allgemeine Geschäftsbedingungen",
+    "termDescription": "Bitte lesen Sie die Allgemeinen Geschäftsbedingungen sorgfältig durch, bevor Sie die Anwendung verwenden.",
+    "aboutLabel": "Erzählen Sie uns von sich",
+    "aboutDescription": "Bitte geben Sie einige Informationen über sich selbst an.",
+    "teamLabel": "Team",
+    "teamDescription": "Beitreten oder erstellen"
   }
 }

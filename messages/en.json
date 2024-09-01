@@ -8,5 +8,16 @@
   },
   "AdminClient": {
     "admin": "No admin permission"
+  },
+  "User": {
+    "noUser": "User not found"
+  },
+  "Onboarding": {
+    "termLabel": "Terms & Conditions",
+    "termDescription": "Please read the terms and conditions carefully before using the application.",
+    "aboutLabel": "Tell us about you",
+    "aboutDescription": "Please provide some information about yourself.",
+    "teamLabel": "Team",
+    "teamDescription": "Join or create"
   }
 }
