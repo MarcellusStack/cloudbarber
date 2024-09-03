@@ -36,4 +36,4 @@ export const getUser = cache(async (id: string) => {
   )(id);
 });
 
-export type UserProps = NonNullable<Awaited<ReturnType<typeof getUser>>>;
+export type UserProps = Awaited<ReturnType<typeof getUser>>;
