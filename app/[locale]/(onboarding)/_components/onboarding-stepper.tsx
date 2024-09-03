@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+
 import {
   IconCircleCheck,
   IconUserQuestion,
@@ -9,15 +9,40 @@ import {
 import { Stepper } from "@mantine/core";
 import { iconStyles } from "@constants/index";
 import { useTranslations } from "next-intl";
+import { UserProps } from "@server/utils/get-user";
 
-export const OnboardingStepper = () => {
+export const OnboardingStepper = ({ user }: { user: UserProps }) => {
   const t = useTranslations("Onboarding");
-  const [active, setActive] = useState(1);
+
+  // Function to determine the active step based on user properties
+  const getActiveStep = (user: UserProps) => {
+    if (!user || !user.dataPolicy) {
+      return 0;
+    }
+    if (
+      user.dataPolicy &&
+      (!user.firstName || !user.lastName || !user.gender || !user.birthDate)
+    ) {
+      return 1;
+    }
+    if (
+      user.firstName &&
+      user.lastName &&
+      user.gender &&
+      user.birthDate &&
+      (!user.organizationId || !user.organization)
+    ) {
+      return 2;
+    }
+    if (user.organizationId && user.organization) {
+      return 3;
+    }
+    return 0;
+  };
 
   return (
     <Stepper
-      active={active}
-      onStepClick={setActive}
+      active={getActiveStep(user)}
       completedIcon={<IconCircleCheck style={iconStyles} />}
     >
       <Stepper.Step
