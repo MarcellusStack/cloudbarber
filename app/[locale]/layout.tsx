@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { ClerkProvider } from "@clerk/nextjs";
 import { deDE, enUS } from "@clerk/localizations";
 import { NextIntlClientProvider } from "next-intl";
@@ -28,7 +30,10 @@ export default async function RootLayout({
             <ColorSchemeScript />
           </head>
           <body>
-            <MantineProvider>{children}</MantineProvider>
+            <MantineProvider>
+              <Notifications />
+              {children}
+            </MantineProvider>
           </body>
         </html>
       </NextIntlClientProvider>
