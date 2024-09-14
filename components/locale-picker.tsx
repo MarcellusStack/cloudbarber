@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import { UnstyledButton, Menu, Image, Group } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons-react";
 import classes from "../styles/locale-picker.module.css";
+import { useEnhancedAction } from "@/hooks/use-enhanced-action";
+import { setUserLocale } from "@server/utils/locale";
+import { useLocale } from "next-intl";
 
 const data = [
   { label: "English", image: "/english.svg", locale: "en" },
@@ -12,45 +13,27 @@ const data = [
 ];
 
 export const LocalePicker = () => {
-  const params = useParams<{ locale: "de" | "en" }>();
-  const router = useRouter();
-  const pathname = usePathname();
+  const locale = useLocale();
   const [opened, setOpened] = useState(false);
-  const [selected, setSelected] = useState(data[0]);
+  const [selected, setSelected] = useState(
+    data.find((item) => item.locale === locale)
+  );
+
+  const { execute } = useEnhancedAction({
+    action: setUserLocale,
+  });
 
   useEffect(() => {
-    const storedLocale = localStorage.getItem("locale");
-    if (storedLocale) {
-      const selectedLocale = data.find((item) => item.locale === storedLocale);
-      if (selectedLocale) {
-        setSelected(selectedLocale);
-        if (storedLocale !== params.locale) {
-          const newPathname = pathname.replace(
-            `/${params.locale}`,
-            `/${storedLocale}`
-          );
-          router.push(newPathname);
-        }
-      }
-    }
-  }, [params.locale, pathname, router]);
-
-  const handleLocaleChange = (item) => {
-    setSelected(item);
-    localStorage.setItem("locale", item.locale);
-    const newPathname = pathname.replace(
-      `/${params.locale}`,
-      `/${item.locale}`
-    );
-    router.push(newPathname);
-  };
+    const selectedLocale = data.find((item) => item.locale === locale);
+    setSelected(selectedLocale);
+  }, [locale]);
 
   const items = data.map((item) => (
     <Menu.Item
       leftSection={
         <Image src={item.image} width={18} height={18} alt={item.label} />
       }
-      onClick={() => handleLocaleChange(item)}
+      onClick={() => execute({ locale: item.locale })}
       key={item.label}
     >
       {item.label}

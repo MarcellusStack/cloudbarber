@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
+import "./globals.css";
+
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { ClerkProvider } from "@clerk/nextjs";
 import { deDE, enUS } from "@clerk/localizations";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +17,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
 }>) {
+  const locale = await getLocale();
   const messages = await getMessages();
   return (
     <ClerkProvider localization={locale === "de" ? deDE : enUS}>
