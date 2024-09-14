@@ -1,7 +1,8 @@
+
 import { auth } from "@clerk/nextjs/server";
-import { useTranslations } from "next-intl";
 import { createSafeActionClient } from "next-safe-action";
 import { getUser } from "./get-user";
+import { getTranslations } from "next-intl/server";
 
 export const actionClient = createSafeActionClient({
   handleServerErrorLog(originalError, utils) {
@@ -20,7 +21,7 @@ export const actionClient = createSafeActionClient({
 });
 
 export const authActionClient = actionClient.use(async ({ next }) => {
-  const t = useTranslations("AuthClient");
+  const t = await getTranslations("AuthClient");
   const { userId } = auth();
 
   if (!userId) {
@@ -37,7 +38,7 @@ export const authActionClient = actionClient.use(async ({ next }) => {
 });
 
 export const adminActionClient = authActionClient.use(async ({ next, ctx }) => {
-  const t = useTranslations("AdminClient");
+  const t = await getTranslations("AdminClient");
 
   const { user } = ctx;
 

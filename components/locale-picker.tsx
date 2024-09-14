@@ -4,7 +4,7 @@ import { UnstyledButton, Menu, Image, Group } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons-react";
 import classes from "../styles/locale-picker.module.css";
 import { useEnhancedAction } from "@/hooks/use-enhanced-action";
-import { setUserLocale } from "@server/utils/locale";
+import { setUserLocale } from "@server/utils/set-user-locale";
 import { useLocale } from "next-intl";
 
 const data = [
