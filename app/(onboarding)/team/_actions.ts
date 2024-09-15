@@ -1,30 +1,31 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { authActionClient } from "@server/utils/action-clients";
-import { revalidateTag } from "next/cache";
+import { actionClient, authActionClient } from "@server/utils/action-clients";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { getLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
+import { termsSchema } from "../terms/_schemas";
 import { userInfoSchema } from "./_schemas";
-import { convertDateToUTC } from "@/utils/convert-date-to-utc";
 
 export const createUserInfo = authActionClient
   .schema(userInfoSchema)
   .action(async ({ parsedInput, ctx }) => {
     try {
-      const utcDate = convertDateToUTC(parsedInput.birthDate);
       await prisma.user.update({
         where: { id: ctx.user.id },
         data: {
           firstName: parsedInput.firstName,
           lastName: parsedInput.lastName,
           gender: parsedInput.gender,
-          birthDate: utcDate,
+          birthDate: parsedInput.birthDate,
         },
       });
+      revalidateTag(ctx.user.id);
     } catch (error) {
       throw new Error(`An error occurred : ${error}`);
     }
 
-    revalidateTag(ctx.user.id);
-    return redirect(`/join-organization`);
+    return redirect(`/user-info`);
   });

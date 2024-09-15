@@ -9,6 +9,7 @@ import {
   Stack,
   TextInput,
 } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import { userInfoSchema } from "../_schemas";
 import { useEnhancedAction } from "@/hooks/use-enhanced-action";
 import { acceptTerms } from "../_actions";
@@ -48,9 +49,18 @@ export const UserInfoForm = () => {
           <Select
             label="Gender"
             data={[
-              { value: "react", label: "React" },
-              { value: "ng", label: "Angular" },
+              { value: "male", label: "Male" },
+              { value: "female", label: "Female" },
+              { value: "nonBinary", label: "Non-Binary" },
             ]}
+          />
+          <DateInput
+            clearable
+            defaultValue={new Date()}
+            label="Birthdate"
+            key={form.key("birthDate")}
+            {...form.getInputProps("birthDate")}
+            valueFormat="YYYY-MM-DD"
           />
           <Button loading={isPending} type="submit">
             Submit

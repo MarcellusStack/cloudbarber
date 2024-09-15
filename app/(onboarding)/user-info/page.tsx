@@ -1,7 +1,7 @@
-import { TermsForm } from "./_components/terms-form";
+import { UserInfoForm } from "./_components/user-info-form";
 
 export const dynamic = "force-dynamic";
 
 export default function Page() {
-  return <h1>UserInfo</h1>;
+  return <UserInfoForm />;
 }

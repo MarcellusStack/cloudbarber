@@ -5,9 +5,15 @@ model User {
     email          String        @unique
     firstName      String?
     lastName       String?
-    gender         String?
+    gender         Gender?
     birthDate      DateTime?
     dataPolicy     Boolean       @default(false)
     organization   Organization? @relation(fields: [organizationId], references: [id])
     organizationId String?
+}
+
+enum Gender {
+    male
+    female
+    nonBinary
 }
