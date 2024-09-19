@@ -4,3 +4,8 @@ export const iconStyles = {
 };
 
 export const COOKIE_NAME = "NEXT_LOCALE";
+
+export const prismaTransactionConfig = {
+  maxWait: 10000,
+  timeout: 20000,
+};

@@ -4,7 +4,7 @@ model Organization {
     updatedAt   DateTime     @updatedAt
     name        String
     description String?
-    adminUserId String       @unique
     users       User[]
+    permissions Permission[]
     invitations Invitation[]
 }

@@ -1,0 +1,24 @@
+model Permission {
+    id                 String        @id @default(uuid())
+    createdAt          DateTime      @default(now())
+    updatedAt          DateTime      @updatedAt
+    name               String
+    description        String?
+    isAdmin            Boolean       @default(false)
+    createOrganization Boolean       @default(false)
+    readOrganization   Boolean       @default(false)
+    updateOrganization Boolean       @default(false)
+    deleteOrganization Boolean       @default(false)
+    createInvitation   Boolean       @default(false)
+    readInvitation     Boolean       @default(false)
+    updateInvitation   Boolean       @default(false)
+    deleteInvitation   Boolean       @default(false)
+    createPermission   Boolean       @default(false)
+    readPermission     Boolean       @default(false)
+    updatePermission   Boolean       @default(false)
+    deletePermission   Boolean       @default(false)
+    invitations        Invitation[]
+    organization       Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+    organizationId     String?
+    users              User[]
+}

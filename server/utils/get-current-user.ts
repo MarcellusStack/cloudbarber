@@ -29,7 +29,7 @@ export const getCurrentUser = cache(async () => {
           organizationId: true,
           organization: {
             select: {
-              adminUserId: true,
+              name: true,
             },
           },
         },

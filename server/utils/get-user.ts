@@ -22,7 +22,7 @@ export const getUser = cache(async (id: string) => {
           organizationId: true,
           organization: {
             select: {
-              adminUserId: true,
+              name: true,
             },
           },
         },

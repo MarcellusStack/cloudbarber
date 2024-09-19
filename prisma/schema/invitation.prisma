@@ -5,6 +5,8 @@ model Invitation {
     email          String
     organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
     organizationId String
+    permission     Permission   @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+    permissionId   String
 
     @@unique([email, organizationId])
 }
