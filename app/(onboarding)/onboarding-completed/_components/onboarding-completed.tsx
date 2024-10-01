@@ -1,39 +1,37 @@
 "use client";
-import {
-  Button,
-  List,
-  Paper,
-  rem,
-  Space,
-  ThemeIcon,
-  Title,
-} from "@mantine/core";
-import { IconCircleCheck } from "@tabler/icons-react";
+
 import Link from "next/link";
 import React from "react";
+import { iconStyles } from "@/constants";
+import { Button, List, Paper, Stack, ThemeIcon, Title } from "@mantine/core";
+import { IconCircleCheck } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
+import { ButtonLink } from "@/components/button-link";
 
 export const OnboardingCompleted = () => {
+  const t = useTranslations("OnboardingCompleted");
   return (
-    <Paper>
-      <Title order={1}>Successfull Onboarded</Title>
-      <Space h="sm" />
-      <List
-        spacing="xs"
-        size="sm"
-        center
-        icon={
-          <ThemeIcon color="teal" size={24} radius="xl">
-            <IconCircleCheck style={{ width: rem(16), height: rem(16) }} />
-          </ThemeIcon>
-        }
-      >
-        <List.Item>Accepted Terms</List.Item>
-        <List.Item>Setup User Info</List.Item>
-        <List.Item>Created Organization and invited Users</List.Item>
-      </List>
-      <Button component={Link} href="/dashboard">
-        Go to Dashboard
-      </Button>
+    <Paper withBorder p="lg">
+      <Stack gap="sm">
+        <Title order={2}>{t("title")}</Title>
+
+        <List
+          spacing="xs"
+          center
+          icon={
+            <ThemeIcon color="green" radius="xl">
+              <IconCircleCheck style={iconStyles} />
+            </ThemeIcon>
+          }
+        >
+          <List.Item>{t("acceptedTerms")}</List.Item>
+          <List.Item>{t("setupUserInfo")}</List.Item>
+          <List.Item>{t("createdOrganizationAndInvitedUsers")}</List.Item>
+        </List>
+        <ButtonLink href="/dashboard">
+          {t("goToDashboard")}
+        </ButtonLink>
+      </Stack>
     </Paper>
   );
 };

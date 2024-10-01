@@ -1,66 +1,92 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { UnstyledButton, Menu, Image, Group } from "@mantine/core";
-import { IconChevronDown } from "@tabler/icons-react";
-import classes from "../styles/locale-picker.module.css";
+import {
+  Combobox,
+  useCombobox,
+  Group,
+  ActionIcon,
+  Text,
+  Box,
+} from "@mantine/core";
+import Image from "next/image";
 import { useEnhancedAction } from "@/hooks/use-enhanced-action";
 import { setUserLocale } from "@server/utils/set-user-locale";
 import { useLocale } from "next-intl";
 
 const data = [
-  { label: "English", image: "/english.svg", locale: "en" },
-  { label: "German", image: "/german.svg", locale: "de" },
+  { label: "English", image: "/english.svg", value: "en" },
+  { label: "German", image: "/german.svg", value: "de" },
 ];
 
 export const LocalePicker = () => {
   const locale = useLocale();
-  const [opened, setOpened] = useState(false);
-  const [selected, setSelected] = useState(
-    data.find((item) => item.locale === locale)
-  );
+  const [selected, setSelected] = useState(locale);
 
   const { execute } = useEnhancedAction({
     action: setUserLocale,
   });
 
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+
   useEffect(() => {
-    const selectedLocale = data.find((item) => item.locale === locale);
-    setSelected(selectedLocale);
+    setSelected(locale);
   }, [locale]);
 
-  const items = data.map((item) => (
-    <Menu.Item
-      leftSection={
-        <Image src={item.image} width={18} height={18} alt={item.label} />
-      }
-      onClick={() => execute({ locale: item.locale })}
-      key={item.label}
-    >
-      {item.label}
-    </Menu.Item>
+  const handleChange = (value: string | null) => {
+    if (value) {
+      execute({ locale: value });
+      setSelected(value);
+    }
+  };
+
+  const options = data.map((item) => (
+    <Combobox.Option value={item.value} key={item.value}>
+      <Group gap="sm">
+        <Image src={item.image} width={22} height={22} alt={item.label} />
+        <Text>{item.label}</Text>
+      </Group>
+    </Combobox.Option>
   ));
 
+  const selectedItem = data.find((item) => item.value === selected);
+
   return (
-    <Menu
-      onOpen={() => setOpened(true)}
-      onClose={() => setOpened(false)}
-      radius="md"
-      width="target"
-      withinPortal
-    >
-      <Menu.Target>
-        <UnstyledButton
-          className={classes.control}
-          data-expanded={opened || undefined}
-        >
-          <Group gap="xs">
-            <Image src={selected.image} width={22} height={22} alt="locale" />
-            <span className={classes.label}>{selected.label}</span>
-          </Group>
-          <IconChevronDown size="1rem" className={classes.icon} stroke={1.5} />
-        </UnstyledButton>
-      </Menu.Target>
-      <Menu.Dropdown>{items}</Menu.Dropdown>
-    </Menu>
+    <Box style={{ position: "relative" }}>
+      <Combobox
+        radius="sm"
+        store={combobox}
+        onOptionSubmit={(val) => {
+          handleChange(val);
+          combobox.closeDropdown();
+        }}
+        width={140}
+      >
+        <Combobox.Target>
+          <ActionIcon
+            onClick={() => combobox.toggleDropdown()}
+            style={{
+              background: "transparent",
+              border: "none",
+              padding: 0,
+              cursor: "pointer",
+            }}
+          >
+            {selectedItem && (
+              <Image
+                src={selectedItem.image}
+                width={28}
+                height={28}
+                alt={selectedItem.label}
+              />
+            )}
+          </ActionIcon>
+        </Combobox.Target>
+        <Combobox.Dropdown>
+          <Combobox.Options>{options}</Combobox.Options>
+        </Combobox.Dropdown>
+      </Combobox>
+    </Box>
   );
 };

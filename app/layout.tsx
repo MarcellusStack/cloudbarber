@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
+import "@mantine/carousel/styles.css";
 import "./globals.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
@@ -10,6 +11,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { deDE, enUS } from "@clerk/localizations";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Navbar } from "@/components/navbar";
+import { theme } from "@lib/theme";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,7 +34,7 @@ export default async function RootLayout({
             <ColorSchemeScript />
           </head>
           <body>
-            <MantineProvider>
+            <MantineProvider theme={theme}>
               <Notifications />
               {children}
             </MantineProvider>

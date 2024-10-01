@@ -14,10 +14,47 @@
   },
   "Onboarding": {
     "termLabel": "Terms & Conditions",
-    "termDescription": "Please read the terms and conditions carefully before using the application.",
+    "termDescription": "Please read the terms before using.",
     "aboutLabel": "Tell us about you",
-    "aboutDescription": "Please provide some information about yourself.",
+    "aboutDescription": "Please enter your details.",
     "teamLabel": "Team",
-    "teamDescription": "Join or create"
+    "teamDescription": "Create or join."
+  },
+  "BaseNavigation": {
+    "features": "Features",
+    "showcase": "Showcase",
+    "pricing": "Pricing",
+    "about": "About"
+  },
+  "OnboardingTerms": {
+    "accept": "I accept the terms",
+    "buttonAccept": "accept"
+  },
+  "OnboardingUserInfo": {
+    "title": "User Info",
+    "description": "Please enter your details.",
+    "firstName": "Firstname",
+    "lastName": "Lastname",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "nonBinary": "Non-Binary",
+    "birthDate": "Birthdate"
+  },
+  "OnboardingJoinOrganization": {
+    "title": "Join Organization",
+    "description": "Please enter your details.",
+    "organizationName": "Organization Name",
+    "addUser": "Add User"
+  },
+  "OnboardingCompleted": {
+    "title": "Completed",
+    "acceptedTerms": "Accepted Terms",
+    "setupUserInfo": "Setup User Info",
+    "createdOrganizationAndInvitedUsers": "Created Organization and invited Users",
+    "goToDashboard": "Go to Dashboard"
+  },
+  "button": {
+    "submit": "Submit"
   }
 }

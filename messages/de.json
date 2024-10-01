@@ -14,10 +14,49 @@
   },
   "Onboarding": {
     "termLabel": "Allgemeine Geschäftsbedingungen",
-    "termDescription": "Bitte lesen Sie die Allgemeinen Geschäftsbedingungen sorgfältig durch, bevor Sie die Anwendung verwenden.",
+    "termDescription": "Bitte lesen Sie die AGB vor der Nutzung.",
     "aboutLabel": "Erzählen Sie uns von sich",
-    "aboutDescription": "Bitte geben Sie einige Informationen über sich selbst an.",
+    "aboutDescription": "Bitte geben Sie Ihre Daten ein.",
     "teamLabel": "Team",
-    "teamDescription": "Beitreten oder erstellen"
+    "teamDescription": "Erstellen oder beitreten"
+  },
+  "BaseNavigation": {
+    "features": "Funktionen",
+    "showcase": "Präsentation",
+    "pricing": "Preise",
+    "about": "Über uns"
+  },
+  "OnboardingTerms": {
+    "title": "AGB",
+    "description": "Bitte lesen Sie die AGB vor der Nutzung.",
+    "accept": "Ich akzeptiere die AGB",
+    "buttonAccept": "akzeptieren"
+  },
+  "OnboardingUserInfo": {
+    "title": "Benutzerinformationen",
+    "description": "Bitte geben Sie Ihre Daten ein.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "nonBinary": "Divers",
+    "birthDate": "Geburtsdatum"
+  },
+  "OnboardingJoinOrganization": {
+    "title": "Organisation beitreten",
+    "description": "Bitte geben Sie die Organisation ein.",
+    "organizationName": "Organisation",
+    "addUser": "Benutzer hinzufügen"
+  },
+  "OnboardingCompleted": {
+    "title": "Abgeschlossen",
+    "acceptedTerms": "AGB akzeptiert",
+    "setupUserInfo": "Benutzerinformationen eingerichtet",
+    "createdOrganizationAndInvitedUsers": "Organisation erstellt und Benutzer eingeladen",
+    "goToDashboard": "Zum Dashboard"
+  },
+  "button": {
+    "submit": "Bestätigen"
   }
 }

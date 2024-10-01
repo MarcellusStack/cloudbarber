@@ -2,20 +2,23 @@
 import React from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import {
-  Button,
-  Checkbox,
   Paper,
   Select,
   Stack,
   TextInput,
+  Title,
+  Text,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { userInfoSchema } from "../_schemas";
 import { useEnhancedAction } from "@/hooks/use-enhanced-action";
 import { createUserInfo } from "../_actions";
+import { SubmitButton } from "@/components/submit-button";
+import { useTranslations } from "next-intl";
 
 export const UserInfoForm = () => {
-  const { execute, result, isPending } = useEnhancedAction({
+  const t = useTranslations("OnboardingUserInfo");
+  const { execute, isPending } = useEnhancedAction({
     action: createUserInfo,
   });
   const form = useForm({
@@ -30,29 +33,31 @@ export const UserInfoForm = () => {
   });
 
   return (
-    <Paper withBorder p="xs">
+    <Paper withBorder p="lg">
       <form
         onSubmit={form.onSubmit((values) => {
           execute(values);
         })}
       >
         <Stack gap="sm">
+          <Title size="h2">{t("title")}</Title>
+          <Text c="dimmed">{t("description")}</Text>
           <TextInput
-            label="Firstname"
+            label={t("firstName")}
             key={form.key("firstName")}
             {...form.getInputProps("firstName")}
           />
           <TextInput
-            label="Lastname"
+            label={t("lastName")}
             key={form.key("lastName")}
             {...form.getInputProps("lastName")}
           />
           <Select
-            label="Gender"
+            label={t("gender")}
             data={[
-              { value: "male", label: "Male" },
-              { value: "female", label: "Female" },
-              { value: "nonBinary", label: "Non-Binary" },
+              { value: "male", label: t("male") },
+              { value: "female", label: t("female") },
+              { value: "nonBinary", label: t("nonBinary") },
             ]}
             key={form.key("gender")}
             {...form.getInputProps("gender")}
@@ -60,14 +65,12 @@ export const UserInfoForm = () => {
           <DateInput
             clearable
             defaultValue={new Date()}
-            label="Birthdate"
+            label={t("birthDate")}
             key={form.key("birthDate")}
             {...form.getInputProps("birthDate")}
             valueFormat="YYYY-MM-DD"
           />
-          <Button loading={isPending} type="submit">
-            Submit
-          </Button>
+          <SubmitButton loading={isPending} />
         </Stack>
       </form>
     </Paper>
