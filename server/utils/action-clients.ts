@@ -1,8 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
-import { createSafeActionClient } from "next-safe-action";
-import { getUser } from "./get-user";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
+import { createSafeActionClient } from "next-safe-action";
+import { getUser } from "./get-user";
+import { rateLimit } from "@server/utils/redis";
 
 export const actionClient = createSafeActionClient({
   async handleReturnedServerError(e) {
@@ -32,7 +33,7 @@ export const actionClientWithMeta = createSafeActionClient({
   },
 });
 
-export const authActionClient = actionClient.use(async ({ next }) => {
+export const authActionClient = actionClient.use(async ({ next, metadata }) => {
   const t = await getTranslations("AuthClient");
   const { userId } = auth();
 
@@ -40,11 +41,13 @@ export const authActionClient = actionClient.use(async ({ next }) => {
     throw new Error(t("userId"));
   }
 
+  await rateLimit(userId);
+
   const user = await getUser(userId);
 
   if (!user) {
     throw new Error(t("user"));
   }
 
-  return next({ ctx: { user } });
+  return next({ ctx: { user, metadata } });
 });

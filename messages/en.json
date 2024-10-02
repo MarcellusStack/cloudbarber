@@ -9,7 +9,9 @@
     "userId": "No active session found",
     "user": "User not found"
   },
-
+  "RateLimit": {
+    "tooManyRequests": "Too many requests. Please try again later."
+  },
   "User": {
     "noUser": "User not found"
   },
