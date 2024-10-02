@@ -3,7 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { createSafeActionClient } from "next-safe-action";
 import { getUser } from "./get-user";
-import { rateLimit } from "@server/utils/redis";
+import { rateLimit } from "@lib/redis";
+import { trackEvent } from "@lib/posthog";
 
 export const actionClient = createSafeActionClient({
   async handleReturnedServerError(e) {
@@ -47,6 +48,10 @@ export const authActionClient = actionClient.use(async ({ next, metadata }) => {
 
   if (!user) {
     throw new Error(t("user"));
+  }
+
+  if (metadata) {
+    trackEvent(userId, metadata.event);
   }
 
   return next({ ctx: { user, metadata } });

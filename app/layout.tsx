@@ -11,8 +11,13 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { deDE, enUS } from "@clerk/localizations";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-import { Navbar } from "@/components/navbar";
 import { theme } from "@lib/theme";
+import dynamic from "next/dynamic";
+import { PostHogProvider } from "@providers/post-hog-provider";
+
+const PostHogPageView = dynamic(() => import("@providers/post-hog-provider"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,19 +33,22 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <ClerkProvider localization={locale === "de" ? deDE : enUS}>
-      <NextIntlClientProvider messages={messages}>
-        <html lang={locale}>
-          <head>
-            <ColorSchemeScript />
-          </head>
-          <body>
-            <MantineProvider theme={theme}>
-              <Notifications />
-              {children}
-            </MantineProvider>
-          </body>
-        </html>
-      </NextIntlClientProvider>
+      <PostHogProvider>
+        <PostHogPageView />
+        <NextIntlClientProvider messages={messages}>
+          <html lang={locale}>
+            <head>
+              <ColorSchemeScript />
+            </head>
+            <body>
+              <MantineProvider theme={theme}>
+                <Notifications />
+                {children}
+              </MantineProvider>
+            </body>
+          </html>
+        </NextIntlClientProvider>
+      </PostHogProvider>
     </ClerkProvider>
   );
 }
