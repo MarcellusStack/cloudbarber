@@ -1,22 +1,34 @@
-
 import { auth } from "@clerk/nextjs/server";
 import { createSafeActionClient } from "next-safe-action";
 import { getUser } from "./get-user";
 import { getTranslations } from "next-intl/server";
+import { z } from "zod";
 
 export const actionClient = createSafeActionClient({
-  handleServerErrorLog(originalError, utils) {
-    // You can access these properties inside the `utils` object.
-    // Note that here you also have access to the custom server error defined by `handleReturnedServerError`.
-    const { clientInput, bindArgsClientInputs, metadata, ctx, returnedError } =
-      utils;
+  async handleReturnedServerError(e) {
+    const t = await getTranslations("ActionClient");
+    if (e instanceof Error) {
+      return e.message;
+    }
 
-    // We can, for example, also send the error to a dedicated logging system.
-    //reportErrorToSentry(originalError);
+    return t("error");
   },
+});
 
-  handleReturnedServerError(e) {
-    return { error: e.message };
+export const actionClientWithMeta = createSafeActionClient({
+  async handleReturnedServerError(e) {
+    const t = await getTranslations("ActionClient");
+    if (e instanceof Error) {
+      return e.message;
+    }
+
+    return t("error");
+  },
+  defineMetadataSchema() {
+    return z.object({
+      permission: z.string().optional(),
+      event: z.string().optional(),
+    });
   },
 });
 
@@ -32,20 +44,6 @@ export const authActionClient = actionClient.use(async ({ next }) => {
 
   if (!user) {
     throw new Error(t("user"));
-  }
-
-  return next({ ctx: { user } });
-});
-
-export const adminActionClient = authActionClient.use(async ({ next, ctx }) => {
-  const t = await getTranslations("AdminClient");
-
-  const { user } = ctx;
-
-  const isAdmin = user.id === user.organization.adminUserId;
-
-  if (!isAdmin) {
-    throw new Error(t("admin"));
   }
 
   return next({ ctx: { user } });

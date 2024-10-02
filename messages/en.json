@@ -2,13 +2,14 @@
   "HomePage": {
     "title": "Hello world!"
   },
+  "ActionClient": {
+    "error": "Something went wrong. Please try again later."
+  },
   "AuthClient": {
     "userId": "No active session found",
     "user": "User not found"
   },
-  "AdminClient": {
-    "admin": "No admin permission"
-  },
+
   "User": {
     "noUser": "User not found"
   },

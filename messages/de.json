@@ -2,12 +2,12 @@
   "HomePage": {
     "title": "Hallo Welt!"
   },
+  "ActionClient": {
+    "error": "Etwas ist schief gelaufen. Bitte versuchen Sie es später erneut."
+  },
   "AuthClient": {
     "userId": "Keine aktive Sitzung gefunden",
     "user": "Benutzer nicht gefunden"
-  },
-  "AdminClient": {
-    "admin": "Keine Admin Berechtigung"
   },
   "User": {
     "noUser": "Benutzer nicht gefunden"
