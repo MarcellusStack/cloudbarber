@@ -4,6 +4,7 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { rateLimit } from "@/lib/redis";
 
 export const getCurrentUser = cache(async () => {
   const { userId } = auth();
@@ -11,6 +12,8 @@ export const getCurrentUser = cache(async () => {
   if (!userId) {
     throw new Error("User not found");
   }
+
+  await rateLimit(userId);
 
   return await unstable_cache(
     async (userId) => {
