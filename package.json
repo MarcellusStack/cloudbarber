@@ -21,6 +21,7 @@
     "@mantine/notifications": "^7.12.1",
     "@mantine/spotlight": "^7.12.1",
     "@prisma/client": "^5.19.1",
+    "@sentry/nextjs": "^8.33.0",
     "@tabler/icons-react": "^3.14.0",
     "@upstash/ratelimit": "^2.0.3",
     "dayjs": "^1.11.13",

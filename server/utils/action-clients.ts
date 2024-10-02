@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
@@ -29,7 +30,7 @@ export const actionClientWithMeta = createSafeActionClient({
   defineMetadataSchema() {
     return z.object({
       permission: z.string().optional(),
-      event: z.string().optional(),
+      event: z.string(),
     });
   },
 });
@@ -53,6 +54,10 @@ export const authActionClient = actionClient.use(async ({ next, metadata }) => {
   if (metadata) {
     trackEvent(userId, metadata.event);
   }
-
-  return next({ ctx: { user, metadata } });
+  return Sentry.withServerActionInstrumentation(
+    metadata?.event ?? "",
+    async () => {
+      return next({ ctx: { user, metadata } });
+    }
+  );
 });
