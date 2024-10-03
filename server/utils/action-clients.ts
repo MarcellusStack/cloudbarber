@@ -6,6 +6,8 @@ import { createSafeActionClient } from "next-safe-action";
 import { getUser } from "./get-user";
 import { rateLimit } from "@lib/redis";
 import { trackEvent } from "@lib/posthog";
+import { checkAdminOrPermission } from "./check-admin-or-permission";
+import { CurrentUserProps, getCurrentUser } from "./get-current-user";
 
 export const actionClient = createSafeActionClient({
   async handleReturnedServerError(e) {
@@ -51,7 +53,11 @@ export const authActionClient = actionClient.use(async ({ next, metadata }) => {
     throw new Error(t("user"));
   }
 
-  if (metadata) {
+  if (metadata && metadata.permission) {
+    await checkAdminOrPermission(user, metadata.permission);
+  }
+
+  if (metadata && metadata.event) {
     trackEvent(userId, metadata.event);
   }
   return Sentry.withServerActionInstrumentation(

@@ -28,9 +28,7 @@ export const OnboardingCompleted = () => {
           <List.Item>{t("setupUserInfo")}</List.Item>
           <List.Item>{t("createdOrganizationAndInvitedUsers")}</List.Item>
         </List>
-        <ButtonLink href="/dashboard">
-          {t("goToDashboard")}
-        </ButtonLink>
+        <ButtonLink href="/dashboard">{t("goToDashboard")}</ButtonLink>
       </Stack>
     </Paper>
   );

@@ -9,6 +9,9 @@
     "userId": "No active session found",
     "user": "User not found"
   },
+  "Permission": {
+    "noPermission": "You do not have the necessary permissions"
+  },
   "RateLimit": {
     "tooManyRequests": "Too many requests. Please try again later."
   },

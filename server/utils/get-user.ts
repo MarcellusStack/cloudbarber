@@ -25,6 +25,23 @@ export const getUser = cache(async (id: string) => {
               name: true,
             },
           },
+          permissions: {
+            select: {
+              isAdmin: true,
+              createOrganization: true,
+              readOrganization: true,
+              updateOrganization: true,
+              deleteOrganization: true,
+              createInvitation: true,
+              readInvitation: true,
+              updateInvitation: true,
+              deleteInvitation: true,
+              createPermission: true,
+              readPermission: true,
+              updatePermission: true,
+              deletePermission: true,
+            },
+          },
         },
       });
     },
