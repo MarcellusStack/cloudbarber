@@ -2,6 +2,13 @@
   "HomePage": {
     "title": "Hallo Welt!"
   },
+  "Notification": {
+    "executeTitle": "Aktion wird ausgeführt",
+    "executeMessage": "Bitte warten",
+    "successTitle": "Aktion erfolgreich ausgeführt",
+    "errorTitle": "Aktion fehlgeschlagen",
+    "errorMessage": "Bitte versuchen Sie es später erneut."
+  },
   "ActionClient": {
     "error": "Etwas ist schief gelaufen. Bitte versuchen Sie es später erneut."
   },

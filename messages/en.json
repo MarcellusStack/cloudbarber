@@ -2,6 +2,13 @@
   "HomePage": {
     "title": "Hello world!"
   },
+  "Notification": {
+    "executeTitle": "Action is running",
+    "executeMessage": "Please wait",
+    "successTitle": "Action successful",
+    "errorTitle": "Action failed",
+    "errorMessage": "Please try again later."
+  },
   "ActionClient": {
     "error": "Something went wrong. Please try again later."
   },

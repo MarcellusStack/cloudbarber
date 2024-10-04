@@ -4,6 +4,7 @@ import { notifications } from "@mantine/notifications";
 import { useRouter } from "next/navigation";
 import { modals } from "@mantine/modals";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslations } from "next-intl";
 
 export type EnhancedActionProps = {
   action: any;
@@ -22,6 +23,7 @@ export const useEnhancedAction = ({
   onSuccess,
   onError,
 }: EnhancedActionProps) => {
+  const t = useTranslations("Notification");
   const router = useRouter();
   const executeNotification = uuidv4();
   const { execute, result, isPending } = useAction(action, {
@@ -32,8 +34,8 @@ export const useEnhancedAction = ({
         loading: true,
         withBorder: true,
         autoClose: false,
-        title: "Aktion wird ausgeführt",
-        message: "Bitte warten",
+        title: t("executeTitle"),
+        message: t("executeMessage"),
         color: "yellow",
       });
 
@@ -53,7 +55,7 @@ export const useEnhancedAction = ({
         id: uuidv4(),
         withBorder: true,
         autoClose: 5000,
-        title: "Erfolgreich",
+        title: t("successTitle"),
         message: data.message as string,
         color: "green",
       });
@@ -83,10 +85,8 @@ export const useEnhancedAction = ({
         id: uuidv4(),
         withBorder: true,
         autoClose: 5000,
-        title: "Fehler",
-        message: error.serverError
-          ? error.serverError
-          : "Aktion fehlgeschlagen, versuchen sie es später erneut",
+        title: t("errorTitle"),
+        message: error.serverError ? error.serverError : t("errorMessage"),
         color: "red",
       });
 
