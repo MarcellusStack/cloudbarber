@@ -7,4 +7,7 @@ model Organization {
     users       User[]
     permissions Permission[]
     invitations Invitation[]
+    todolists   Todolist[]
+    todos       Todo[]
+    todoPlans   Json?
 }
