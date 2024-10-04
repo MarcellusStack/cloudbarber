@@ -15,7 +15,7 @@ export type NavbarItem = {
 export const Navbar = ({ items }: { items?: NavbarItem[] }) => {
   return (
     <nav>
-      <Flex w="100%" justify="space-between" align="center">
+      <Flex w="100%" h="100%" justify="space-between" align="center">
         <Flex gap="sm" style={{ flex: 1 }} align="center">
           <Link href="/">
             <Stack gap="-10px" align="center">
@@ -41,19 +41,19 @@ export const Navbar = ({ items }: { items?: NavbarItem[] }) => {
             </Stack>
           </Link>
         </Flex>
-        <Flex gap="sm" justify="center" style={{ flex: 2 }}>
-          <Box
-            p="sm"
-            style={{
-              borderWidth: 1,
-              borderStyle: "solid",
-              borderColor: "#F3F3F3",
-              borderRadius: 100,
-            }}
-          >
-            <Flex align="center" gap="sm">
-              {items &&
-                items?.map((item) => (
+        {items && (
+          <Flex gap="sm" justify="center" style={{ flex: 2 }}>
+            <Box
+              p="sm"
+              style={{
+                borderWidth: 1,
+                borderStyle: "solid",
+                borderColor: "#F3F3F3",
+                borderRadius: 100,
+              }}
+            >
+              <Flex align="center" gap="sm">
+                {items.map((item) => (
                   <ButtonLink
                     key={item.label}
                     href={item.href}
@@ -62,9 +62,10 @@ export const Navbar = ({ items }: { items?: NavbarItem[] }) => {
                     {item.label}
                   </ButtonLink>
                 ))}
-            </Flex>
-          </Box>
-        </Flex>
+              </Flex>
+            </Box>
+          </Flex>
+        )}
         <Flex gap="sm" align="center" justify="flex-end" style={{ flex: 1 }}>
           <LocalePicker />
           <UserButton />
