@@ -14,6 +14,7 @@ import {
   IconUsersPlus,
 } from "@tabler/icons-react";
 import { iconStyles } from "@constants/index";
+import { Breadcrumb } from "@components/breadcrumb";
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations("AppNavigation");
@@ -121,7 +122,10 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main>
-        <Stack gap="md">{children}</Stack>
+        <Stack gap="md">
+          <Breadcrumb />
+          {children}
+        </Stack>
       </AppShell.Main>
     </AppShell>
   );
