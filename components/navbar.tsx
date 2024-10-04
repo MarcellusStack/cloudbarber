@@ -14,7 +14,7 @@ export type NavbarItem = {
 
 export const Navbar = ({ items }: { items?: NavbarItem[] }) => {
   return (
-    <nav>
+    <nav style={{ height: "100%" }}>
       <Flex w="100%" h="100%" justify="space-between" align="center">
         <Flex gap="sm" style={{ flex: 1 }} align="center">
           <Link href="/">

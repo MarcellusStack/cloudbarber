@@ -7,6 +7,7 @@ import {
   ActionIcon,
   Text,
   Box,
+  Flex,
 } from "@mantine/core";
 import Image from "next/image";
 import { useEnhancedAction } from "@/hooks/use-enhanced-action";
@@ -53,7 +54,7 @@ export const LocalePicker = () => {
   const selectedItem = data.find((item) => item.value === selected);
 
   return (
-    <Box style={{ position: "relative" }}>
+    <Flex pos="relative" align="center">
       <Combobox
         radius="sm"
         store={combobox}
@@ -87,6 +88,6 @@ export const LocalePicker = () => {
           <Combobox.Options>{options}</Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
-    </Box>
+    </Flex>
   );
 };
