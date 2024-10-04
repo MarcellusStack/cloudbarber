@@ -39,6 +39,15 @@
     "pricing": "Preise",
     "about": "Über uns"
   },
+  "AppNavigation": {
+    "dashboard": "Dashboard",
+    "team": "Team",
+    "shop": "Shop",
+    "customers": "Kunden",
+    "newSale": "Neuer Verkauf",
+    "newAppointment": "Neue Termin",
+    "settings": "Einstellungen"
+  },
   "OnboardingTerms": {
     "title": "AGB",
     "description": "Bitte lesen Sie die AGB vor der Nutzung.",

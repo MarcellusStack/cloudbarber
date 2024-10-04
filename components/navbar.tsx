@@ -12,7 +12,7 @@ export type NavbarItem = {
   href: string;
 };
 
-export const Navbar = ({ items }: { items: NavbarItem[] }) => {
+export const Navbar = ({ items }: { items?: NavbarItem[] }) => {
   return (
     <nav>
       <Flex w="100%" justify="space-between" align="center">
@@ -52,11 +52,16 @@ export const Navbar = ({ items }: { items: NavbarItem[] }) => {
             }}
           >
             <Flex align="center" gap="sm">
-              {items.map((item) => (
-                <ButtonLink key={item.label} href={item.href} variant="subtle">
-                  {item.label}
-                </ButtonLink>
-              ))}
+              {items &&
+                items?.map((item) => (
+                  <ButtonLink
+                    key={item.label}
+                    href={item.href}
+                    variant="subtle"
+                  >
+                    {item.label}
+                  </ButtonLink>
+                ))}
             </Flex>
           </Box>
         </Flex>

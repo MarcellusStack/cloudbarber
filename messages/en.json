@@ -39,6 +39,15 @@
     "pricing": "Pricing",
     "about": "About"
   },
+  "AppNavigation": {
+    "dashboard": "Dashboard",
+    "team": "Team",
+    "shop": "Shop",
+    "customers": "Customers",
+    "newSale": "New Sale",
+    "newAppointment": "New Appointment",
+    "settings": "Settings"
+  },
   "OnboardingTerms": {
     "accept": "I accept the terms",
     "buttonAccept": "accept"
