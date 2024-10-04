@@ -9,6 +9,7 @@ import { convertDateToUTC } from "@/utils/convert-date-to-utc";
 
 export const createUserInfo = authActionClient
   .schema(userInfoSchema)
+  .metadata({ event: "createUserInfo" })
   .action(async ({ parsedInput, ctx }) => {
     try {
       const utcDate = convertDateToUTC(parsedInput.birthDate);

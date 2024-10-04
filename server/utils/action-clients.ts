@@ -7,7 +7,6 @@ import { getUser } from "./get-user";
 import { rateLimit } from "@lib/redis";
 import { trackEvent } from "@lib/posthog";
 import { checkAdminOrPermission } from "./check-admin-or-permission";
-import { CurrentUserProps, getCurrentUser } from "./get-current-user";
 
 export const actionClient = createSafeActionClient({
   async handleReturnedServerError(e) {
@@ -37,33 +36,35 @@ export const actionClientWithMeta = createSafeActionClient({
   },
 });
 
-export const authActionClient = actionClient.use(async ({ next, metadata }) => {
-  const t = await getTranslations("AuthClient");
-  const { userId } = auth();
+export const authActionClient = actionClientWithMeta.use(
+  async ({ next, metadata }) => {
+    const t = await getTranslations("AuthClient");
+    const { userId } = auth();
 
-  if (!userId) {
-    throw new Error(t("userId"));
-  }
-
-  await rateLimit(userId);
-
-  const user = await getUser(userId);
-
-  if (!user) {
-    throw new Error(t("user"));
-  }
-
-  if (metadata && metadata.permission) {
-    await checkAdminOrPermission(user, metadata.permission);
-  }
-
-  if (metadata && metadata.event) {
-    trackEvent(userId, metadata.event);
-  }
-  return Sentry.withServerActionInstrumentation(
-    metadata?.event ?? "",
-    async () => {
-      return next({ ctx: { user, metadata } });
+    if (!userId) {
+      throw new Error(t("userId"));
     }
-  );
-});
+
+    await rateLimit(userId);
+
+    const user = await getUser(userId);
+
+    if (!user) {
+      throw new Error(t("user"));
+    }
+
+    if (metadata && metadata.permission) {
+      await checkAdminOrPermission(user, metadata.permission);
+    }
+
+    if (metadata && metadata.event) {
+      trackEvent(userId, metadata.event);
+    }
+    return Sentry.withServerActionInstrumentation(
+      metadata?.event ?? "",
+      async () => {
+        return next({ ctx: { user, metadata } });
+      }
+    );
+  }
+);

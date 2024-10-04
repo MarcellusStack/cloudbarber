@@ -10,6 +10,7 @@ import { clerkClient } from "@clerk/nextjs/server";
 
 export const createOrganization = authActionClient
   .schema(createOrganizationSchema)
+  .metadata({ event: "createOrganization" })
   .action(async ({ parsedInput, ctx }) => {
     try {
       await prisma.$transaction(
