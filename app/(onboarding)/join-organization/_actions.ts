@@ -15,11 +15,31 @@ export const createOrganization = authActionClient
     try {
       await prisma.$transaction(
         async (tx) => {
+          //create tenant
+          const tenant = await tx.tenant.create({
+            data: {
+              name: parsedInput.tenantName,
+              admin: {
+                connect: {
+                  id: ctx.user.id,
+                },
+              },
+            },
+          });
           // Organisation erstellen
           const organization = await tx.organization.create({
             data: {
-              name: parsedInput.name,
-
+              tenant: {
+                connect: {
+                  id: tenant.id,
+                },
+              },
+              name: parsedInput.organizationName,
+              street: parsedInput.street,
+              city: parsedInput.city,
+              state: parsedInput.state,
+              postalCode: parsedInput.postalCode,
+              country: parsedInput.country,
               permissions: {
                 createMany: {
                   data: [
@@ -50,11 +70,12 @@ export const createOrganization = authActionClient
           await tx.user.update({
             where: { id: ctx.user.id },
             data: {
-              organization: {
+              organizations: {
                 connect: {
                   id: organization.id,
                 },
               },
+              activeOrganizationId: organization.id,
               permissions: {
                 connect: [
                   {

@@ -29,9 +29,16 @@ export const getCurrentUser = cache(async () => {
           gender: true,
           birthDate: true,
           dataPolicy: true,
-          organizationId: true,
-          organization: {
+          tenantAdmin: {
             select: {
+              id: true,
+              name: true,
+            },
+          },
+          activeOrganizationId: true,
+          organizations: {
+            select: {
+              id: true,
               name: true,
             },
           },

@@ -1,3 +1,5 @@
+
+
 model Organization {
     id          String       @id @default(uuid())
     createdAt   DateTime     @default(now())
@@ -10,4 +12,13 @@ model Organization {
     todolists   Todolist[]
     todos       Todo[]
     todoPlans   Json?
+
+    street     String
+    city       String
+    state      String
+    postalCode String
+    country    String
+
+    tenantId String
+    tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 }

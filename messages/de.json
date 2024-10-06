@@ -68,7 +68,9 @@
   "OnboardingJoinOrganization": {
     "title": "Organisation beitreten",
     "description": "Bitte geben Sie die Organisation ein.",
+    "tenantName": "Name des Unternehmens",
     "organizationName": "Organisation",
+    "organizationDescription": "Sie können später weitere Organisationen für unterschiedliche Standorte erstellen.",
     "addUser": "Benutzer hinzufügen"
   },
   "OnboardingCompleted": {

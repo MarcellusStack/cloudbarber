@@ -60,7 +60,7 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
         : redirectTo("/user-info", req);
     }
 
-    if (!user.organizationId) {
+    if (!user.activeOrganizationId) {
       return url.pathname.includes("/join-organization")
         ? NextResponse.next()
         : redirectTo("/join-organization", req);

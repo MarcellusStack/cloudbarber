@@ -1,17 +1,18 @@
 model User {
-    id             String        @id @default(uuid())
-    createdAt      DateTime      @default(now())
-    updatedAt      DateTime      @updatedAt
-    email          String        @unique
-    firstName      String?
-    lastName       String?
-    gender         Gender?
-    birthDate      DateTime?
-    dataPolicy     Boolean       @default(false)
-    organization   Organization? @relation(fields: [organizationId], references: [id])
-    organizationId String?
-    permissions    Permission[]
-    todos          Todo[]
+    id                   String         @id @default(uuid())
+    createdAt            DateTime       @default(now())
+    updatedAt            DateTime       @updatedAt
+    email                String         @unique
+    firstName            String?
+    lastName             String?
+    gender               Gender?
+    birthDate            DateTime?
+    dataPolicy           Boolean        @default(false)
+    organizations        Organization[]
+    activeOrganizationId String?
+    permissions          Permission[]
+    todos                Todo[]
+    tenantAdmin          Tenant?        @relation
 }
 
 enum Gender {

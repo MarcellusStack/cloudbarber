@@ -29,7 +29,13 @@ export const CreateOrganizationForm = () => {
     validate: zodResolver(createOrganizationSchema),
     mode: "uncontrolled",
     initialValues: {
-      name: "",
+      tenantName: "",
+      organizationName: "",
+      street: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      country: "",
       users: [],
     },
   });
@@ -65,10 +71,47 @@ export const CreateOrganizationForm = () => {
           <Title size="h2">{t("title")}</Title>
           <Text c="dimmed">{t("description")}</Text>
           <TextInput
+            label={t("tenantName")}
+            placeholder="BarberPalace"
+            key={form.key("tenantName")}
+            {...form.getInputProps("tenantName")}
+          />
+          <TextInput
             label={t("organizationName")}
             placeholder="MuratsBarberPalace"
-            key={form.key("name")}
-            {...form.getInputProps("name")}
+            description={t("organizationDescription")}
+            key={form.key("organizationName")}
+            {...form.getInputProps("organizationName")}
+          />
+          <TextInput
+            label={t("street")}
+            placeholder="Musterstraße 1"
+            key={form.key("street")}
+            {...form.getInputProps("street")}
+          />
+          <TextInput
+            label={t("city")}
+            placeholder="Musterstadt"
+            key={form.key("city")}
+            {...form.getInputProps("city")}
+          />
+          <TextInput
+            label={t("state")}
+            placeholder="Musterland"
+            key={form.key("state")}
+            {...form.getInputProps("state")}
+          />
+          <TextInput
+            label={t("postalCode")}
+            placeholder="12345"
+            key={form.key("postalCode")}
+            {...form.getInputProps("postalCode")}
+          />
+          <TextInput
+            label={t("country")}
+            placeholder="Musterland"
+            key={form.key("country")}
+            {...form.getInputProps("country")}
           />
           {users}
           <Button
