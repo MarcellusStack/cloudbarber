@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import "@mantine/core/styles.css";
+
 import "@mantine/dates/styles.css";
+import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/carousel/styles.css";
 import "./globals.css";
+import "dayjs/locale/de";
+import "dayjs/locale/en";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
@@ -13,7 +16,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { theme } from "@lib/theme";
 import dynamic from "next/dynamic";
-import { PostHogProvider } from "@providers/post-hog-provider";
+import { Providers } from "@providers/providers";
+import { DatesProvider } from "@mantine/dates";
 
 const PostHogPageView = dynamic(() => import("@providers/post-hog-provider"), {
   ssr: false,
@@ -33,7 +37,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <ClerkProvider localization={locale === "de" ? deDE : enUS}>
-      <PostHogProvider>
+      <Providers>
         <PostHogPageView />
         <NextIntlClientProvider messages={messages}>
           <html lang={locale}>
@@ -48,7 +52,7 @@ export default async function RootLayout({
             </body>
           </html>
         </NextIntlClientProvider>
-      </PostHogProvider>
+      </Providers>
     </ClerkProvider>
   );
 }
