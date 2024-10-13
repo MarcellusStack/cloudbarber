@@ -1,14 +1,7 @@
 "use client";
 import React from "react";
 import { useForm, zodResolver } from "@mantine/form";
-import {
-  Paper,
-  Select,
-  Stack,
-  TextInput,
-  Title,
-  Text,
-} from "@mantine/core";
+import { Paper, Select, Stack, TextInput, Title, Text } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { userInfoSchema } from "../_schemas";
 import { useEnhancedAction } from "@/hooks/use-enhanced-action";
@@ -68,7 +61,7 @@ export const UserInfoForm = () => {
             label={t("birthDate")}
             key={form.key("birthDate")}
             {...form.getInputProps("birthDate")}
-            valueFormat="YYYY-MM-DD"
+            valueFormat="YYYY.MM.DD"
           />
           <SubmitButton loading={isPending} />
         </Stack>
