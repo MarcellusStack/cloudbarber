@@ -70,7 +70,12 @@
     "description": "Bitte geben Sie die Organisation ein.",
     "tenantName": "Name des Unternehmens",
     "organizationName": "Organisation",
-    "organizationDescription": "Sie können später weitere Organisationen für unterschiedliche Standorte erstellen.",
+    "organizationDescription": "Sie können später weitere Organisationen für unterschiedliche Standorte erstellen",
+    "organizationStreet": "Straße",
+    "organizationCity": "Stadt",
+    "organizationState": "Bundesland",
+    "organizationPostalCode": "Postleitzahl",
+    "organizationCountry": "Land",
     "addUser": "Benutzer hinzufügen"
   },
   "OnboardingCompleted": {

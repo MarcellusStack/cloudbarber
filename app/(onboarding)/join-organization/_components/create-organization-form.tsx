@@ -84,31 +84,31 @@ export const CreateOrganizationForm = () => {
             {...form.getInputProps("organizationName")}
           />
           <TextInput
-            label={t("street")}
+            label={t("organizationStreet")}
             placeholder="Musterstraße 1"
             key={form.key("street")}
             {...form.getInputProps("street")}
           />
           <TextInput
-            label={t("city")}
+            label={t("organizationCity")}
             placeholder="Musterstadt"
             key={form.key("city")}
             {...form.getInputProps("city")}
           />
           <TextInput
-            label={t("state")}
+            label={t("organizationState")}
             placeholder="Musterland"
             key={form.key("state")}
             {...form.getInputProps("state")}
           />
           <TextInput
-            label={t("postalCode")}
+            label={t("organizationPostalCode")}
             placeholder="12345"
             key={form.key("postalCode")}
             {...form.getInputProps("postalCode")}
           />
           <TextInput
-            label={t("country")}
+            label={t("organizationCountry")}
             placeholder="Musterland"
             key={form.key("country")}
             {...form.getInputProps("country")}

@@ -68,7 +68,12 @@
     "description": "Please enter your details.",
     "tenantName": "Tenant Name",
     "organizationName": "Organization Name",
-    "organizationDescription": "You can create more organizations for different addresses later.",
+    "organizationDescription": "You can create more organizations for different addresses later",
+    "organizationStreet": "Street",
+    "organizationCity": "City",
+    "organizationState": "State",
+    "organizationPostalCode": "Postal Code",
+    "organizationCountry": "Country",
     "addUser": "Add User"
   },
   "OnboardingCompleted": {
