@@ -9,13 +9,14 @@ import {
 import { Stepper } from "@mantine/core";
 import { iconStyles } from "@constants/index";
 import { useTranslations } from "next-intl";
-import { UserProps } from "@server/utils/get-user";
 
-export const OnboardingStepper = ({ user }: { user: UserProps }) => {
+import { type CurrentUserProps } from "@/server/utils/get-current-user";
+
+export const OnboardingStepper = ({ user }: { user: CurrentUserProps }) => {
   const t = useTranslations("Onboarding");
 
   // Function to determine the active step based on user properties
-  const getActiveStep = (user: UserProps) => {
+  const getActiveStep = (user: CurrentUserProps) => {
     if (!user || !user.dataPolicy) {
       return 0;
     }
@@ -30,11 +31,11 @@ export const OnboardingStepper = ({ user }: { user: UserProps }) => {
       user.lastName &&
       user.gender &&
       user.birthDate &&
-      (!user.organizationId || !user.organization)
+      (!user.organizations || user.organizations.length === 0)
     ) {
       return 2;
     }
-    if (user.organizationId && user.organization) {
+    if (user.organizations && user.organizations.length > 0) {
       return 3;
     }
     return 0;

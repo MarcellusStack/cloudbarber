@@ -12,7 +12,9 @@ model User {
     activeOrganizationId String?
     permissions          Permission[]
     todos                Todo[]
-    tenantAdmin          Tenant?        @relation
+    tenantAdmin          Tenant?        @relation(name: "tenantAdmin")
+    tenantId             String?
+    tenant               Tenant?        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 }
 
 enum Gender {

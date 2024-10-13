@@ -15,6 +15,7 @@ import {
 } from "@tabler/icons-react";
 import { iconStyles } from "@constants/index";
 import { Breadcrumb } from "@components/breadcrumb";
+import { OrganizationSwitcher } from "../organization-switcher";
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations("AppNavigation");
@@ -53,6 +54,9 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
         </Box>
       </AppShell.Header>
       <AppShell.Navbar p="md">
+        <AppShell.Section>
+          <OrganizationSwitcher />
+        </AppShell.Section>
         <AppShell.Section grow my="md" component={ScrollArea}>
           <Stack gap="md">
             {navLinks.map((link) => (

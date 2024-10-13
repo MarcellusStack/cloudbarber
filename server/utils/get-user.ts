@@ -19,6 +19,13 @@ export const getUser = cache(async (id: string) => {
           gender: true,
           birthDate: true,
           dataPolicy: true,
+          tenantId: true,
+          tenant: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
           tenantAdmin: {
             select: {
               id: true,

@@ -24,6 +24,11 @@ export const createOrganization = authActionClient
                   id: ctx.user.id,
                 },
               },
+              users: {
+                connect: {
+                  id: ctx.user.id,
+                },
+              },
             },
           });
           // Organisation erstellen

@@ -2,6 +2,7 @@ model Tenant {
     id            String         @id @default(uuid())
     name          String
     organizations Organization[]
+    users         User[]
     adminId       String         @unique
-    admin         User           @relation(fields: [adminId], references: [id], onDelete: Cascade)
+    admin         User           @relation(fields: [adminId], references: [id], onDelete: Cascade, name: "tenantAdmin")
 }
