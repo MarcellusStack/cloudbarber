@@ -22,6 +22,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isBetween from "dayjs/plugin/isBetween";
+import Providers from "@/providers/providers";
 
 dayjs.locale("de");
 dayjs.extend(utc);
@@ -60,14 +61,16 @@ export default function RootLayout({
       </head>
       <body className={`${bebasNeue.variable} ${roboto.variable}`}>
         <NuqsAdapter>
-          <MantineProvider theme={theme}>
-            <ModalsProvider>
-              <Notifications />
-              <DatesProvider settings={{ locale: "de" }}>
-                {children}
-              </DatesProvider>
-            </ModalsProvider>
-          </MantineProvider>
+          <Providers>
+            <MantineProvider theme={theme}>
+              <ModalsProvider>
+                <Notifications />
+                <DatesProvider settings={{ locale: "de" }}>
+                  {children}
+                </DatesProvider>
+              </ModalsProvider>
+            </MantineProvider>
+          </Providers>
         </NuqsAdapter>
       </body>
     </html>
