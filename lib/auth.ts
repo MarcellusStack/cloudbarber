@@ -9,6 +9,7 @@ import {
   webhooks,
 } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
+import * as schema from "@/lib/db/schema";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
@@ -21,6 +22,7 @@ const polarClient = new Polar({
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg", // or "mysql", "sqlite"
+    schema,
   }),
   emailAndPassword: {
     enabled: true,
@@ -29,11 +31,12 @@ export const auth = betterAuth({
     polar({
       client: polarClient,
       createCustomerOnSignUp: true,
+      enableCustomerPortal: true,
       use: [
         checkout({
           products: [
             {
-              productId: "f339d004-c38c-48e2-a26e-bd6459780a68",
+              productId: "0314c22a-3e5c-4cde-b3c8-15a4236f71f1",
               slug: "Pro", // Custom slug for easy reference in Checkout URL, e.g. /checkout/Pro
             },
           ],
