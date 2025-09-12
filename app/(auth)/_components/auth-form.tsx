@@ -15,6 +15,7 @@ import { z } from "zod/v4";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { IconBrandGoogle } from "@tabler/icons-react";
 
 const authSchema = z.object({
   email: z.email({ error: "Ungültige E-Mail" }),
@@ -48,6 +49,23 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
         : authSchema.pick({ email: true, password: true })
     ),
   });
+
+  const signInGoogle = async () => {
+    const data = await authClient.signIn.social(
+      {
+        provider: "google",
+      },
+      {
+        onSuccess: (ctx) => {
+          router.push("/dashboard");
+        },
+        onError: (ctx) => {
+          // display the error message
+          alert(ctx.error.message);
+        },
+      }
+    );
+  };
 
   const signIn = async (email: string, password: string) => {
     await authClient.signIn.email(
@@ -151,7 +169,17 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
           >
             {type === "sign-in" ? "Anmelden" : "Registrieren"}
           </Button>
-
+          <Button
+            ff={"Roboto"}
+            onClick={signInGoogle}
+            variant="outline"
+            color="primary.5"
+            leftSection={
+              <IconBrandGoogle style={{ width: 16, height: 16 }} stroke={1.5} />
+            }
+          >
+            Mit Google anmelden
+          </Button>
           <Text ta="center" ff={"Roboto"} c="tertiary.3">
             {type === "sign-in" ? "Noch kein Konto?" : "Bereits ein Konto?"}
             <Anchor

@@ -32,8 +32,12 @@ export const UserButton = () => {
   return (
     <Menu shadow="md" width={200} withinPortal>
       <Menu.Target>
-        <ActionIcon color="red" size="xl" variant="subtle" radius="xl">
-          <Avatar color="red" src={session.user.image || undefined} radius="xl">
+        <ActionIcon color="primary.5" size="xl" variant="subtle" radius="xl">
+          <Avatar
+            color="primary.5"
+            src={session.user.image || undefined}
+            radius="xl"
+          >
             {getInitials(session.user.name)}
           </Avatar>
         </ActionIcon>
