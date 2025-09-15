@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useTransition } from "react";
 import {
   Button,
   TextInput,
@@ -28,6 +28,7 @@ const authSchema = z.object({
 });
 
 export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const form = useForm({
     mode: "uncontrolled",
@@ -51,20 +52,21 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
   });
 
   const signInGoogle = async () => {
-    const data = await authClient.signIn.social(
-      {
-        provider: "google",
-      },
-      {
-        onSuccess: (ctx) => {
-          router.push("/dashboard");
+    startTransition(async () => {
+      await authClient.signIn.social(
+        {
+          provider: "google",
+          callbackURL: "/dashboard",
         },
-        onError: (ctx) => {
-          // display the error message
-          alert(ctx.error.message);
-        },
-      }
-    );
+        {
+          onSuccess: (ctx) => {},
+          onError: (ctx) => {
+            // display the error message
+            alert(ctx.error.message);
+          },
+        }
+      );
+    });
   };
 
   const signIn = async (email: string, password: string) => {
@@ -75,9 +77,7 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
         callbackURL: "/dashboard",
       },
       {
-        onSuccess: (ctx) => {
-          router.push("/dashboard");
-        },
+        onSuccess: (ctx) => {},
         onError: (ctx) => {
           // display the error message
           alert(ctx.error.message);
@@ -174,6 +174,7 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
             onClick={signInGoogle}
             variant="outline"
             color="primary.5"
+            loading={isPending}
             leftSection={
               <IconBrandGoogle style={{ width: 16, height: 16 }} stroke={1.5} />
             }

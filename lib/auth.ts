@@ -10,6 +10,10 @@ import {
 } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import * as schema from "@/lib/db/schema";
+import { resend } from "./resend";
+import EmailVerificationEmail from "@/emails/email-verification";
+import { emailVerificationTask } from "@/trigger/email-verification";
+import { tasks } from "@trigger.dev/sdk";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
@@ -25,7 +29,16 @@ export const auth = betterAuth({
     schema,
   }),
   emailAndPassword: {
+    requireEmailVerification: true,
     enabled: true,
+  },
+  emailVerification: {
+    sendVerificationEmail: async ({ user, url, token }, request) => {
+      await tasks.trigger<typeof emailVerificationTask>("email-verification", {
+        email: user.email,
+        url,
+      });
+    },
   },
   socialProviders: {
     google: {
