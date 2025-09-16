@@ -1,4 +1,6 @@
 "use client";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { UserButton } from "@/components/user-button";
 import { AppShell, Burger, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
@@ -17,9 +19,9 @@ export const DashboardLayout = ({
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          Header
+        <Group h="100%" px="md" justify="space-between">
+          <Breadcrumbs />
+          <UserButton />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
