@@ -1,9 +1,5 @@
-import { UserButton } from "@/components/user-button";
+import { SectionHeading } from "@/components/section-heading";
 
 export default function Page() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  );
+  return <SectionHeading title="Dashboard" description="Übersicht Ihrer Kunden, Dienstleistungen und mehr" />;
 }
