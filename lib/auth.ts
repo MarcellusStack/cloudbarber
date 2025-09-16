@@ -13,6 +13,7 @@ import * as schema from "@/lib/db/schema";
 import { emailVerificationTask } from "@/trigger/email-verification";
 import { tasks } from "@trigger.dev/sdk";
 import { resetPasswordTask } from "@/trigger/reset-password";
+import { organization } from "better-auth/plugins";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
@@ -56,6 +57,14 @@ export const auth = betterAuth({
     },
   },
   plugins: [
+    organization({
+      requireEmailVerificationOnInvitation: true,
+      teams: {
+        enabled: true,
+        maximumTeams: 100,
+        allowRemovingAllTeams: false,
+      },
+    }),
     polar({
       client: polarClient,
       createCustomerOnSignUp: true,
