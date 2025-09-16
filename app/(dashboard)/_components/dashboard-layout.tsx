@@ -1,8 +1,10 @@
 "use client";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { UserButton } from "@/components/user-button";
-import { AppShell, Burger, Group } from "@mantine/core";
+import { AppShell, Burger, Group, rem, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { IconSearch } from "@tabler/icons-react";
+import Link from "next/link";
 import React from "react";
 
 export const DashboardLayout = ({
@@ -25,6 +27,22 @@ export const DashboardLayout = ({
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
+        <Link
+          href="/"
+          style={{
+            textDecoration: "none",
+            fontFamily: "Bebas Neue",
+            fontWeight: 400,
+            fontSize: rem(32),
+            color: "black",
+          }}
+        >
+          CloudBarber
+        </Link>
+        <TextInput
+          leftSection={<IconSearch size={16} />}
+          placeholder="Suche"
+        />
         <Group>
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         </Group>
