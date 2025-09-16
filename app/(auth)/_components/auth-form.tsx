@@ -14,8 +14,9 @@ import { useForm } from "@mantine/form";
 import { z } from "zod/v4";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import { IconBrandGoogle } from "@tabler/icons-react";
+import { showNotification } from "@/utils/notification";
+import { useRouter } from "next/navigation";
 
 const authSchema = z.object({
   email: z.email({ error: "Ungültige E-Mail" }),
@@ -61,8 +62,7 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
         {
           onSuccess: (ctx) => {},
           onError: (ctx) => {
-            // display the error message
-            alert(ctx.error.message);
+            showNotification(ctx.error.message, "error");
           },
         }
       );
@@ -79,8 +79,7 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
       {
         onSuccess: (ctx) => {},
         onError: (ctx) => {
-          // display the error message
-          alert(ctx.error.message);
+          showNotification(ctx.error.message, "error");
         },
       }
     );
@@ -92,15 +91,17 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
         email, // user email address
         password, // user password -> min 8 characters by default
         name, // user display name
-        callbackURL: "/dashboard", // A URL to redirect to after the user verifies their email (optional)
       },
       {
         onSuccess: (ctx) => {
-          router.push("/dashboard");
+          showNotification(
+            "Bitte bestätigen Sie Ihre E-Mail in Ihrem Posteingang",
+            "success"
+          );
+          router.push("/sign-in");
         },
         onError: (ctx) => {
-          // display the error message
-          alert(ctx.error.message);
+          showNotification(ctx.error.message, "error");
         },
       }
     );
