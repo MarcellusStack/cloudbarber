@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
-    IconBuildingStore,
+  IconBuildingStore,
   IconCalendar,
   IconHome,
   IconRazorElectric,
@@ -83,10 +83,11 @@ export const DashboardLayout = ({
               className={navLinkStyles.root}
               color="primary"
               href="/services"
-              label="Dienstleistungen"
+              label="Dienstleistungen (demnächst 🚧)"
               ff={"Roboto"}
               active={pathname.startsWith("/services")}
               leftSection={<IconRazorElectric size={20} stroke={1.5} />}
+              disabled
             />
             <NavLink
               component={Link}
@@ -113,8 +114,9 @@ export const DashboardLayout = ({
               className={navLinkStyles.root}
               color="primary"
               href="/customers"
-              label="Kunden"
+              label="Kunden (demnächst 🚧)"
               ff={"Roboto"}
+              disabled
               active={pathname.startsWith("/customers")}
               leftSection={<IconUsersGroup size={20} stroke={1.5} />}
             />
@@ -123,8 +125,9 @@ export const DashboardLayout = ({
               className={navLinkStyles.root}
               color="primary"
               href="/shop"
-              label="Shop-Seite"
+              label="Shop-Seite (demnächst 🚧)"
               ff={"Roboto"}
+              disabled
               active={pathname.startsWith("/shop")}
               leftSection={<IconBuildingStore size={20} stroke={1.5} />}
             />
@@ -149,7 +152,9 @@ export const DashboardLayout = ({
           </Group>
         </Stack>
       </AppShell.Navbar>
-      <AppShell.Main bg="quaternary.0">{children}</AppShell.Main>
+      <AppShell.Main bg="quaternary.0">
+        <Stack gap="md">{children}</Stack>
+      </AppShell.Main>
     </AppShell>
   );
 };
