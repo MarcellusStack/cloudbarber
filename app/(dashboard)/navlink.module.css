@@ -1,0 +1,6 @@
+.root {
+  /* The following styles will be applied only when button is disabled */
+  &[data-active="true"] {
+    border-left: 3px solid var(--mantine-color-primary-5);
+  }
+}
