@@ -10,10 +10,9 @@ import {
 } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import * as schema from "@/lib/db/schema";
-import { resend } from "./resend";
-import EmailVerificationEmail from "@/emails/email-verification";
 import { emailVerificationTask } from "@/trigger/email-verification";
 import { tasks } from "@trigger.dev/sdk";
+import { resetPasswordTask } from "@/trigger/reset-password";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
@@ -31,12 +30,21 @@ export const auth = betterAuth({
   emailAndPassword: {
     requireEmailVerification: true,
     enabled: true,
+
+    sendResetPassword: async ({ user, url, token }, request) => {
+      await tasks.trigger<typeof resetPasswordTask>("reset-password", {
+        email: user.email,
+        url,
+        name: user.name,
+      });
+    },
   },
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }, request) => {
       await tasks.trigger<typeof emailVerificationTask>("email-verification", {
         email: user.email,
         url,
+        name: user.name,
       });
     },
   },

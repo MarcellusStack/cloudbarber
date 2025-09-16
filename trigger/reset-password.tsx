@@ -1,14 +1,17 @@
 import { logger, task } from "@trigger.dev/sdk";
 import { Resend } from "resend";
-import EmailVerificationEmail from "@/emails/email-verification";
+import ResetPasswordEmail from "@/emails/reset-password";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const emailVerificationTask = task({
-  id: "email-verification",
+export const resetPasswordTask = task({
+  id: "reset-password",
   // Set an optional maxDuration to prevent tasks from running indefinitely
   maxDuration: 300, // Stop executing after 300 secs (5 mins) of compute
-  run: async (payload: { email: string; url: string, name: string }, { ctx }) => {
+  run: async (
+    payload: { email: string; url: string; name: string },
+    { ctx }
+  ) => {
     try {
       logger.log("Sending email using React.email and Resend", {
         payload,
@@ -17,8 +20,8 @@ export const emailVerificationTask = task({
       const { data, error } = await resend.emails.send({
         from: "onboarding@resend.dev",
         to: payload.email,
-        subject: "E-Mail-Adresse bestätigen für CloudBarber",
-        react: <EmailVerificationEmail url={payload.url} name={payload.name} />,
+        subject: "Passwort zurücksetzen für CloudBarber",
+        react: <ResetPasswordEmail url={payload.url} name={payload.name} />,
       });
 
       if (error) {

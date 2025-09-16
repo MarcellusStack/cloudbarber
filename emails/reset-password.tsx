@@ -18,40 +18,39 @@ type Props = {
 };
 
 const defaultProps: Props = {
-  url: "https://cloudbarber.app/verify",
+  url: "https://cloudbarber.app/reset-password",
 };
 
-export default function EmailVerificationEmail({
+export default function ResetPasswordEmail({
   url = defaultProps.url,
   name,
 }: Props) {
   return (
     <Html>
       <Head />
-      <Preview>CloudBarber – E‑Mail-Adresse bestätigen</Preview>
+      <Preview>CloudBarber – Passwort zurücksetzen</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Section style={{ marginBottom: 24 }}>
             <Text style={styles.brand}>CloudBarber</Text>
-            <Text style={styles.heading}>E‑Mail-Adresse bestätigen</Text>
+            <Text style={styles.heading}>Passwort zurücksetzen</Text>
           </Section>
 
           <Text style={styles.text}>Hallo{name ? ` ${name}` : ""},</Text>
           <Text style={styles.text}>
-            bitte bestätige deine E‑Mail‑Adresse, um dein CloudBarber‑Konto zu
-            verifizieren. Klicke auf den folgenden Button, um deine
-            E‑Mail‑Adresse zu bestätigen.
+            du hast angefordert, dein Passwort für dein CloudBarber‑Konto
+            zurückzusetzen. Klicke auf den folgenden Button, um ein neues
+            Passwort festzulegen.
           </Text>
 
           <Section style={{ textAlign: "center", margin: "24px 0" }}>
             <Button href={url} style={styles.button}>
-              E‑Mail-Adresse bestätigen
+              Passwort zurücksetzen
             </Button>
           </Section>
 
           <Text style={styles.textSmall}>
-            Klicke auf den folgenden Link, um deine E‑Mail‑Adresse zu
-            bestätigen:
+            Klicke auf den folgenden Link, um dein Passwort zurückzusetzen:
           </Text>
           <Section style={{ margin: "12px 0" }}>
             <Link href={url} style={styles.link}>
@@ -65,7 +64,8 @@ export default function EmailVerificationEmail({
           </Text>
 
           <Text style={styles.textSmall}>
-            Wenn du diese E‑Mail nicht erwartet hast, kannst du sie ignorieren.
+            Wenn du diese Anfrage nicht gestellt hast, kannst du diese E‑Mail
+            ignorieren.
           </Text>
 
           <Hr style={styles.hr} />

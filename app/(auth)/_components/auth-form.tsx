@@ -9,6 +9,7 @@ import {
   Title,
   Text,
   Anchor,
+  Group,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { z } from "zod/v4";
@@ -18,7 +19,7 @@ import { IconBrandGoogle } from "@tabler/icons-react";
 import { showNotification } from "@/utils/notification";
 import { useRouter } from "next/navigation";
 
-const authSchema = z.object({
+export const authSchema = z.object({
   email: z.email({ error: "Ungültige E-Mail" }),
   password: z
     .string()
@@ -182,17 +183,23 @@ export const AuthForm = ({ type }: { type: "sign-in" | "sign-up" }) => {
           >
             Mit Google anmelden
           </Button>
-          <Text ta="center" ff={"Roboto"} c="tertiary.3">
-            {type === "sign-in" ? "Noch kein Konto?" : "Bereits ein Konto?"}
-            <Anchor
-              ml="xs"
-              href={type === "sign-in" ? "/sign-up" : "/sign-in"}
-              ff={"Roboto"}
-              c="primary.5"
-            >
-              {type === "sign-in" ? "Registrieren" : "Anmelden"}
+          <Stack gap="sm" align="center">
+            <Text c="tertiary.3" ff={"Roboto"}>
+              {type === "sign-in" ? "Noch kein Konto?" : "Bereits ein Konto?"}
+              <Anchor
+                
+                href={type === "sign-in" ? "/sign-up" : "/sign-in"}
+                ff={"Roboto"}
+                c="primary.5"
+              >
+                {type === "sign-in" ? " hier Registrieren" : " hier Anmelden"}
+              </Anchor>
+            </Text>
+
+            <Anchor href={"/forgot-password"} ff={"Roboto"} c="primary.5">
+              Passwort vergessen?
             </Anchor>
-          </Text>
+          </Stack>
         </Stack>
       </form>
     </Paper>
