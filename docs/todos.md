@@ -2,5 +2,20 @@
 
 - [x] Setup GitHub Repo
 - [x] Setup Project
-- [ ] Install Mantine
-- [ ] Setup Landing Page
+- [x] Install Mantine
+- [x] Setup Landing Page
+- [ ] Setup InstantDB Schema
+- [ ] Setup Auth
+- [ ] Setup Onboarding
+  - [ ] Setup Org Creation
+  - [ ] Setup Shop Creation
+  - [ ] Setup Seat Creation
+- [ ] Setup Billing and optional skipping for tiers
+- [ ] Setup Dashboard
+- [ ] Setup Shop Page
+- [ ] Setup Seat Page
+- [ ] Setup Shareable Link
+- [ ] Setup Basic Analytics
+- [ ] Setup Basic Notifications
+- [ ] Setup Basic Settings
+- [ ] Setup Basic Profile
