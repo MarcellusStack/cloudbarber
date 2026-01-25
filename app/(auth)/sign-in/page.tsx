@@ -2,16 +2,42 @@
 
 import {
   Button,
-  Container,
   Paper,
   Stack,
   Text,
   TextInput,
   Title,
   Divider,
+  Loader,
 } from "@mantine/core";
+import { db } from "@/lib/db";
+import Link from "next/link";
 
 export default function SignInPage() {
+  const { user, isLoading } = db.useAuth();
+  console.log(user);
+
+  const handleGuestLogin = () => {
+    // @ts-expect-error signInAnonymously is valid but missing in current type definitions
+    db.auth.signInAnonymously();
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (user) {
+    return (
+      <Stack gap="md" align="center">
+        <Title order={2}>Welcome Back!</Title>
+        <Text c="dimmed">You are already signed in.</Text>
+        <Button component={Link} href="/" size="md">
+          Go to Shop
+        </Button>
+      </Stack>
+    );
+  }
+
   return (
     <Stack gap="xl">
       <Stack gap="xs">
@@ -37,7 +63,12 @@ export default function SignInPage() {
 
         <Divider label="Or continue as" labelPosition="center" my="lg" />
 
-        <Button fullWidth variant="default" size="md">
+        <Button
+          fullWidth
+          variant="default"
+          size="md"
+          onClick={handleGuestLogin}
+        >
           Continue as Guest
         </Button>
       </Paper>
