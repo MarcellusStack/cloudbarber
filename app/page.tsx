@@ -25,6 +25,12 @@ export default function Home() {
         <Container size="lg" h="100%">
           <Group h="100%" px="md" justify="space-between">
             <Group>
+              <NextImage
+                src="/branding.png"
+                alt="CloudBarber Logo"
+                width={30}
+                height={30}
+              />
               <Text fw={700} size="xl" c="primaryColor">
                 CloudBarber
               </Text>
