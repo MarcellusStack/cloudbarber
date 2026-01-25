@@ -4,8 +4,9 @@
 - [x] Setup Project
 - [x] Install Mantine
 - [x] Setup Landing Page
+- [x] Setup InstantDB Schema
+- [x] Setup Mantine Theme
 - [ ] Setup Guest Auth
-- [ ] Setup InstantDB Schema
 - [ ] Setup Onboarding
   - [ ] Setup Org Creation
   - [ ] Setup Shop Creation
@@ -20,3 +21,4 @@
 - [ ] Setup Basic Settings
 - [ ] Setup Basic Profile
 - [ ] Setup Billing and optional skipping for tiers
+- [ ] Setup InstantDB Permissions

@@ -25,7 +25,7 @@ export default function Home() {
         <Container size="lg" h="100%">
           <Group h="100%" px="md" justify="space-between">
             <Group>
-              <Text fw={700} size="xl" c="blue">
+              <Text fw={700} size="xl" c="primaryColor">
                 CloudBarber
               </Text>
             </Group>
@@ -65,13 +65,13 @@ export default function Home() {
               />
             </Group>
 
-            <Badge size="lg" variant="light" color="blue">
+            <Badge size="lg" variant="light" color="primaryColor">
               v1 Available Now
             </Badge>
 
             <Title order={1} size={60} ta="center" style={{ lineHeight: 1.1 }}>
               Modernize Your{" "}
-              <Text span c="blue" inherit>
+              <Text span c="primaryColor" inherit>
                 Barbershop
               </Text>
             </Title>
