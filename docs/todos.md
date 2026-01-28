@@ -6,13 +6,14 @@
 - [x] Setup Landing Page
 - [x] Setup InstantDB Schema
 - [x] Setup Mantine Theme
-- [ ] Setup Guest Auth
+- [x] Setup Guest Auth
 - [ ] Setup Onboarding
   - [ ] Setup Org Creation
   - [ ] Setup Shop Creation
   - [ ] Setup Seat Creation
 
-- [ ] Setup Dashboard
+- [x] Setup Dashboard Layout
+- [ ] Setup Basic Dashboard
 - [ ] Setup Shop Page
 - [ ] Setup Seat Page
 - [ ] Setup Shareable Link
